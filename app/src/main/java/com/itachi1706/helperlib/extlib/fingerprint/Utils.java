@@ -1,7 +1,6 @@
 package com.itachi1706.helperlib.extlib.fingerprint;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 
 import androidx.annotation.AttrRes;
 
