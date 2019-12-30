@@ -1,0 +1,119 @@
+package com.itachi1706.helperlib.helpers
+
+import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.content.pm.Signature
+import android.util.Log
+import java.io.ByteArrayInputStream
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.security.cert.CertificateException
+import java.security.cert.CertificateFactory
+import java.security.cert.X509Certificate
+import java.util.*
+
+/**
+ * Created by Kenneth on 30/12/2019.
+ * for com.itachi1706.helperlib.helpers in Helper Library
+ */
+object ValidationHelper {
+
+    const val SIDELOAD = 0
+    const val GOOGLE_PLAY = 1 //com.android.vending, com.google.android.feedback
+    const val AMAZON = 2 //com.amazon.venezia
+
+    private val playstoreList: List<String> = ArrayList(listOf("com.android.vending", "com.google.android.feedback"))
+    private val amazonList: List<String> = ArrayList(listOf("com.amazon.venezia"))
+
+    fun checkNotSideloaded(context: Context): Boolean {
+        val mergedList: MutableList<String> = ArrayList()
+        mergedList.addAll(playstoreList)
+        mergedList.addAll(amazonList)
+        val installer = context.packageManager.getInstallerPackageName(context.packageName)
+        return installer != null && mergedList.contains(installer)
+    }
+
+    fun checkSideloaded(context: Context): Boolean {
+        return !checkNotSideloaded(context)
+    }
+
+    fun getInstallLocation(context: Context): String? {
+        return getInstallLocation(context, context.packageName)
+    }
+
+    fun getInstallLocation(context: Context, packageName: String?): String? {
+        return context.packageManager.getInstallerPackageName(packageName)
+    }
+
+    fun checkInstallLocation(context: Context): Int {
+        return checkInstallLocation(context, context.packageName)
+    }
+
+    fun checkInstallLocation(context: Context, packageName: String?): Int {
+        val installer = getInstallLocation(context, packageName) ?: return SIDELOAD
+        if (playstoreList.contains(installer)) return GOOGLE_PLAY
+        return if (amazonList.contains(installer)) AMAZON else SIDELOAD
+    }
+
+    // Signature Validation
+    fun getSignatureForValidation(context: Context): String {
+        val pm = context.packageManager
+        val signatures: Array<Signature>
+        return try {
+            val pInfo: PackageInfo = try {
+                pm.getPackageInfo(context.packageName, PackageManager.GET_SIGNATURES)
+            } catch (e: RuntimeException) {
+                Log.e("ValidationHelper", "Failed to get package info. Signature cannot be validated")
+                return "error"
+            }
+            signatures = pInfo.signatures
+            getSignatureString(signatures[0]).trim { it <= ' ' }
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+            Log.e("ValidationHelper", "Failed to get package info. Signature cannot be validated")
+            "error"
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+            Log.e("ValidationHelper", "Algorithm not recognized on this Android Version, signature cannot be validated")
+            "error"
+        }
+    }
+
+    @Throws(CertificateException::class)
+    fun getCert(cert: ByteArray?): X509Certificate {
+        val inputStream = ByteArrayInputStream(cert)
+        val cf = CertificateFactory.getInstance("X509")
+        return cf.generateCertificate(inputStream) as X509Certificate
+    }
+
+    @Throws(NoSuchAlgorithmException::class)
+    fun getSignatureString(sig: Signature): String {
+        val cert = sig.toByteArray()
+        return try {
+            bytesToHex(MessageDigest.getInstance("SHA1").digest(getCert(cert).encoded))
+        } catch (e: CertificateException) {
+            Log.e("Signature", "Cannot Create Signature, Falling back")
+            Log.e("Signature", "Error: " + e.localizedMessage)
+            val md = MessageDigest.getInstance("SHA1")
+            md.update(sig.toByteArray())
+            bytesToHex(md.digest())
+        }
+    }
+
+    private val hexArray = "0123456789ABCDEF".toCharArray()
+    fun bytesToHex(bytes: ByteArray): String {
+        val hexChars = CharArray(bytes.size * 2)
+        for (j in bytes.indices) {
+            val v: Int = bytes[j].toInt() and 0xFF
+            hexChars[j * 2] = hexArray[v ushr 4]
+            hexChars[j * 2 + 1] = hexArray[v and 0x0F]
+        }
+        val sb = StringBuilder()
+        for (i in hexChars.indices) {
+            if (i % 2 == 0 && i != 0) sb.append(":")
+            sb.append(hexChars[i])
+        }
+        return sb.toString()
+    }
+}

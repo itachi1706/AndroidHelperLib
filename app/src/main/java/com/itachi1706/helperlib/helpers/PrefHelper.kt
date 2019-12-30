@@ -1,0 +1,71 @@
+package com.itachi1706.helperlib.helpers
+
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
+import android.os.Build
+import android.os.StrictMode
+import android.preference.PreferenceManager
+import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
+
+/**
+ * Created by Kenneth on 30/12/2019.
+ * for com.itachi1706.helperlib.helpers in Helper Library
+ */
+object PrefHelper {
+    /**
+     * Wrapper to [PreferenceManager.getDefaultSharedPreferences] without invoking StrictMode Disk Read Policy Violation
+     * @param context Context object
+     * @return SharedPreference singleton object
+     */
+    fun getDefaultSharedPreferences(context: Context?): SharedPreferences? {
+        val old = StrictMode.getThreadPolicy()
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder(old).permitDiskReads().build())
+        val sp = PreferenceManager.getDefaultSharedPreferences(context)
+        StrictMode.setThreadPolicy(old)
+        return sp
+    }
+
+    /**
+     * Check if night mode is enabled
+     * @param context Activity Context
+     * @return false if Night mode is disabled, true otherwise
+     */
+    fun isNightModeEnabled(context: Context): Boolean {
+        val currentNightMode =
+            context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return currentNightMode != Configuration.UI_MODE_NIGHT_NO
+    }
+
+    /**
+     * Set Night Mode Theme. Options include:
+     * [AppCompatDelegate.MODE_NIGHT_NO]
+     * [AppCompatDelegate.MODE_NIGHT_YES]
+     * [AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM]
+     * [AppCompatDelegate.MODE_NIGHT_AUTO]
+     * [AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY]
+     * @param newTheme New Theme setting
+     * @param themeName THeme name for logging purposes
+     */
+    fun changeDarkModeTheme(newTheme: Int, themeName: String) {
+        Log.i("AppThemeChanger", "Switching over to $themeName mode")
+        AppCompatDelegate.setDefaultNightMode(newTheme)
+    }
+
+    /**
+     * Does the handling of theme changes natively
+     * @param switchedTheme Either of the values "light", "dark", "battery" or "default"
+     */
+    fun handleDefaultThemeSwitch(switchedTheme: String) {
+        when (switchedTheme) {
+            "light" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_NO, "Light")
+            "dark" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_YES, "Dark")
+            "battery" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY, "Battery Saver")
+            "default" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, "System Default")
+            else ->  // Set as battery saver default if P and below
+                changeDarkModeTheme(if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+                else AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, "Unknown mode, falling back to default")
+        }
+    }
+}
