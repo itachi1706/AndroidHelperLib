@@ -16,6 +16,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
  * for com.itachi1706.helperlib.helpers in Helper Library
  */
 object BitmapUtil {
+    @JvmStatic
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun getBitmap(vectorDrawable: VectorDrawable): Bitmap? {
         val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
@@ -25,6 +26,7 @@ object BitmapUtil {
         return bitmap
     }
 
+    @JvmStatic
     private fun getBitmap(vectorDrawable: VectorDrawableCompat): Bitmap? {
         val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
@@ -33,6 +35,7 @@ object BitmapUtil {
         return bitmap
     }
 
+    @JvmStatic
     fun getBitmap(context: Context, @DrawableRes drawableResId: Int): Bitmap? {
         val drawable = ContextCompat.getDrawable(context, drawableResId)
         return if (drawable is BitmapDrawable) drawable.bitmap

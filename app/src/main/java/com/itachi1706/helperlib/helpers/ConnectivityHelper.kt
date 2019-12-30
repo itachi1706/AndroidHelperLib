@@ -19,11 +19,13 @@ object ConnectivityHelper {
      * @param context Context
      * @return Network Info
      */
+    @JvmStatic
     private fun getNetworkInfo(context: Context): NetworkInfo? {
         val cm = getConnectivityManager(context)
         return cm.activeNetworkInfo
     }
 
+    @JvmStatic
     private fun getNetworkType(networkInfo: NetworkInfo?): Int {
         return networkInfo?.type ?: NO_CONNECTION
     }
@@ -33,6 +35,7 @@ object ConnectivityHelper {
      * @param context Context
      * @return Connectivity Manager
      */
+    @JvmStatic
     private fun getConnectivityManager(context: Context): ConnectivityManager {
         return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
@@ -42,6 +45,7 @@ object ConnectivityHelper {
      * @param context Context
      * @return True if internet, false otherwise
      */
+    @JvmStatic
     fun hasInternetConnection(context: Context): Boolean {
         val activeNetwork = getNetworkInfo(context)
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting
@@ -52,6 +56,7 @@ object ConnectivityHelper {
      * @param context Context
      * @return True if WIFI, false otherwise
      */
+    @JvmStatic
     fun isWifiConnection(context: Context): Boolean {
         val activeNetwork = getNetworkInfo(context)
         return activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_WIFI
@@ -62,6 +67,7 @@ object ConnectivityHelper {
      * @param context Context
      * @return True if Cellular (Mobile), false otherwise
      */
+    @JvmStatic
     fun isCellularConnection(context: Context): Boolean {
         val activeNetwork = getNetworkInfo(context)
         return activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_MOBILE
@@ -72,6 +78,7 @@ object ConnectivityHelper {
      * @param context Context
      * @return Active Netwrok Type (ConnectivityManager.TYPE_WIFI etc.)
      */
+    @JvmStatic
     fun getActiveNetworkType(context: Context): Int {
         return getNetworkType(getNetworkInfo(context))
     }
@@ -82,6 +89,7 @@ object ConnectivityHelper {
      * @param context Context
      * @return true if it should be throttled, false otherwise
      */
+    @JvmStatic
     fun shouldThrottle(context: Context): Boolean {
         val manager = getConnectivityManager(context)
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -103,6 +111,7 @@ object ConnectivityHelper {
      * @return int One of 3 choices
      * {RESTRICT_BACKGROUND_STATUS_ENABLED, RESTRICT_BACKGROUND_STATUS_WHITELISTED, RESTRICT_BACKGROUND_STATUS_DISABLED}
      */
+    @JvmStatic
     @RequiresApi(api = Build.VERSION_CODES.N)
     fun getDataSaverSetting(context: Context): Int {
         val manager = getConnectivityManager(context)

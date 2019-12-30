@@ -26,6 +26,7 @@ object ValidationHelper {
     private val playstoreList: List<String> = ArrayList(listOf("com.android.vending", "com.google.android.feedback"))
     private val amazonList: List<String> = ArrayList(listOf("com.amazon.venezia"))
 
+    @JvmStatic
     fun checkNotSideloaded(context: Context): Boolean {
         val mergedList: MutableList<String> = ArrayList()
         mergedList.addAll(playstoreList)
@@ -34,22 +35,27 @@ object ValidationHelper {
         return installer != null && mergedList.contains(installer)
     }
 
+    @JvmStatic
     fun checkSideloaded(context: Context): Boolean {
         return !checkNotSideloaded(context)
     }
 
+    @JvmStatic
     fun getInstallLocation(context: Context): String? {
         return getInstallLocation(context, context.packageName)
     }
 
+    @JvmStatic
     fun getInstallLocation(context: Context, packageName: String?): String? {
         return context.packageManager.getInstallerPackageName(packageName)
     }
 
+    @JvmStatic
     fun checkInstallLocation(context: Context): Int {
         return checkInstallLocation(context, context.packageName)
     }
 
+    @JvmStatic
     fun checkInstallLocation(context: Context, packageName: String?): Int {
         val installer = getInstallLocation(context, packageName) ?: return SIDELOAD
         if (playstoreList.contains(installer)) return GOOGLE_PLAY
@@ -57,6 +63,7 @@ object ValidationHelper {
     }
 
     // Signature Validation
+    @JvmStatic
     fun getSignatureForValidation(context: Context): String {
         val pm = context.packageManager
         val signatures: Array<Signature>
@@ -80,6 +87,7 @@ object ValidationHelper {
         }
     }
 
+    @JvmStatic
     @Throws(CertificateException::class)
     fun getCert(cert: ByteArray?): X509Certificate {
         val inputStream = ByteArrayInputStream(cert)
@@ -87,6 +95,7 @@ object ValidationHelper {
         return cf.generateCertificate(inputStream) as X509Certificate
     }
 
+    @JvmStatic
     @Throws(NoSuchAlgorithmException::class)
     fun getSignatureString(sig: Signature): String {
         val cert = sig.toByteArray()
@@ -102,6 +111,7 @@ object ValidationHelper {
     }
 
     private val hexArray = "0123456789ABCDEF".toCharArray()
+    @JvmStatic
     fun bytesToHex(bytes: ByteArray): String {
         val hexChars = CharArray(bytes.size * 2)
         for (j in bytes.indices) {

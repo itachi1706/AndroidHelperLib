@@ -19,6 +19,7 @@ object PrefHelper {
      * @param context Context object
      * @return SharedPreference singleton object
      */
+    @JvmStatic
     fun getDefaultSharedPreferences(context: Context?): SharedPreferences? {
         val old = StrictMode.getThreadPolicy()
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder(old).permitDiskReads().build())
@@ -32,6 +33,7 @@ object PrefHelper {
      * @param context Activity Context
      * @return false if Night mode is disabled, true otherwise
      */
+    @JvmStatic
     fun isNightModeEnabled(context: Context): Boolean {
         val currentNightMode =
             context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -48,6 +50,7 @@ object PrefHelper {
      * @param newTheme New Theme setting
      * @param themeName THeme name for logging purposes
      */
+    @JvmStatic
     fun changeDarkModeTheme(newTheme: Int, themeName: String) {
         Log.i("AppThemeChanger", "Switching over to $themeName mode")
         AppCompatDelegate.setDefaultNightMode(newTheme)
@@ -57,6 +60,7 @@ object PrefHelper {
      * Does the handling of theme changes natively
      * @param switchedTheme Either of the values "light", "dark", "battery" or "default"
      */
+    @JvmStatic
     fun handleDefaultThemeSwitch(switchedTheme: String) {
         when (switchedTheme) {
             "light" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_NO, "Light")

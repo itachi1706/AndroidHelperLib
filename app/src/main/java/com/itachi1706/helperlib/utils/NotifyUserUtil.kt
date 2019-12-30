@@ -16,6 +16,7 @@ object NotifyUserUtil {
      * @param currentLayout Current View Layout
      * @param message Message in Snackbar
      */
+    @JvmStatic
     fun showShortDismissSnackbar(currentLayout: View, message: String) {
         Snackbar.make(currentLayout, message, Snackbar.LENGTH_SHORT)
             .setAction(R.string.snackbar_action_dismiss, View.OnClickListener { }).show()
@@ -26,6 +27,7 @@ object NotifyUserUtil {
      * @param context Application Context
      * @param message Message to display in Toast
      */
+    @JvmStatic
     fun createShortToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
