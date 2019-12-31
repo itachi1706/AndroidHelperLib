@@ -21,7 +21,7 @@ repositories {
 		url  "https://dl.bintray.com/itachi1706/ccn-android-lib"
 	}
 }
-...
+…
 dependencies {
   implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See bintray badge for latest version
 }
