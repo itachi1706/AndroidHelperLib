@@ -16,39 +16,35 @@ import javax.net.ssl.SSLException
  * for com.itachi1706.helperlib.helpers in Helper Library
  *
  * Standard class for helping out with HttpURLConnection or HttpsURLConnections
+ *
+ * @property url URL? URL Object
+ * @property mode Int
+ * @property fallbackHttp Boolean
+ * @property timeout Int
+ * @constructor Construct URLHelper with a URL object
  */
-object URLHelper {
-    var HTTP_QUERY_TIMEOUT = 15000 //15 seconds timeout
+class URLHelper(url: URL) {
 
-    private const val HTTP_CONN = 0
-    private const val HTTPS_CONN = 1
+    companion object {
+        const val HTTP_CONN = 0
+        const val HTTPS_CONN = 1
+        const val HTTP_QUERY_TIMEOUT = 15000 //15 seconds timeout
+    }
 
-    private var url: URL? = null
+    private var url: URL? = url
     private var mode = 0
     private var fallbackHttp = true
     private var timeout = -1
 
-    /**
-     * Construct URLHelper with a String URL
-     * @param url String of URL to parse
-     */
-    fun URLHelper(url: String?) {
-        try {
-            this.url = URL(url)
-            mode = if (this.url!!.protocol.equals("https", ignoreCase = true)) HTTPS_CONN else HTTP_CONN
-        } catch (e: MalformedURLException) {
-            e.printStackTrace()
-        }
+    init {
+        mode = if (url.protocol.equals("https", ignoreCase = true)) HTTPS_CONN else HTTP_CONN
     }
 
     /**
-     * Construct URLHelper with a URL object
-     * @param url URL Object
+     * @param url String? String of URL to parse
+     * @constructor Construct URLHelper with a String URL
      */
-    fun URLHelper(url: URL) {
-        this.url = url
-        mode = if (url.protocol.equals("https", ignoreCase = true)) HTTPS_CONN else HTTP_CONN
-    }
+    constructor(url: String?) : this(URL(url))
 
     /**
      * Enable this if you wish to fallback to HTTP if any HTTPS connection fails
