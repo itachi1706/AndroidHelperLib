@@ -43,8 +43,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: |
-            Release Notes Coming soon!
+          body: Release Notes Coming soon!
           draft: false
           prerelease: false
       - name: Upload Release Asset
