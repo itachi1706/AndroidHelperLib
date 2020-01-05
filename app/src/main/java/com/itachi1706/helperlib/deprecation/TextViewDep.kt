@@ -9,7 +9,7 @@ import android.widget.TextView
  * for com.itachi1706.helperlib.deprecation in Helper Library
  */
 @Suppress("DEPRECATION")
-object TextView {
+object TextViewDep {
     @JvmStatic
     fun setTextAppearance(textView: TextView, context: Context?, resId: Int) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) textView.setTextAppearance(context, resId)

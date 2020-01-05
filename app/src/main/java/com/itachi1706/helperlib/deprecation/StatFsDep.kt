@@ -8,7 +8,7 @@ import android.os.StatFs
  * for com.itachi1706.helperlib.deprecation in Helper Library
  */
 @Suppress("DEPRECATION")
-object StatFs {
+object StatFsDep {
     @JvmStatic
     fun getBlockSize(statFs: StatFs): Long {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) statFs.blockSizeLong

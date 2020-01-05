@@ -8,7 +8,7 @@ import android.text.Spanned
  * for com.itachi1706.helperlib.deprecation in Helper Library
  */
 @Suppress("DEPRECATION")
-object Html {
+object HtmlDep {
     @JvmStatic
     fun fromHtml(source: String): Spanned {
         return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) android.text.Html.fromHtml(source)

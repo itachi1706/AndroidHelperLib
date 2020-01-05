@@ -40,9 +40,9 @@ dependencies {
 
 ### Deprecation Classes
 These classes act basically as a compatability layer for versions of Android, using the newer APIs when possible and falling back to deprecated APIs when the new APIs are not available  
-* [HTML](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/Html.kt) - Handles HTML text formatting for TextViews
-* [StatFs](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/StatFs.kt) - Compatibility methods for handling file sizes
-* [TextView](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/TextView.kt) - Handles the method of setting text appearance of a TextView
+* [HTML](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/HtmlDep.kt) - Handles HTML text formatting for TextViews
+* [StatFs](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/StatFsDep.kt) - Compatibility methods for handling file sizes
+* [TextView](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/TextViewDep.kt) - Handles the method of setting text appearance of a TextView
 
 ### Helper classes
 These classes provides some helper methods for various tasks that you may use when developing an Android Project
