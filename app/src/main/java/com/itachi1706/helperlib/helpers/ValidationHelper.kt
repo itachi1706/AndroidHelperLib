@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.Signature
+import android.content.pm.SigningInfo
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import java.io.ByteArrayInputStream
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -68,14 +71,11 @@ object ValidationHelper {
         val pm = context.packageManager
         val signatures: Array<Signature>
         return try {
-            val pInfo: PackageInfo = try {
-                pm.getPackageInfo(context.packageName, PackageManager.GET_SIGNATURES)
-            } catch (e: RuntimeException) {
-                Log.e("ValidationHelper", "Failed to get package info. Signature cannot be validated")
-                return "error"
-            }
-            signatures = pInfo.signatures
+            signatures = getSignatures(pm, context)
             getSignatureString(signatures[0]).trim { it <= ' ' }
+        } catch (e: RuntimeException) {
+            Log.e("ValidationHelper", "Failed to get package info. Signature cannot be validated")
+            return "error"
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             Log.e("ValidationHelper", "Failed to get package info. Signature cannot be validated")
@@ -85,6 +85,15 @@ object ValidationHelper {
             Log.e("ValidationHelper", "Algorithm not recognized on this Android Version, signature cannot be validated")
             "error"
         }
+    }
+
+    @JvmStatic
+    @Suppress("DEPRECATION")
+    @Throws(RuntimeException::class)
+    private fun getSignatures(pm: PackageManager, context: Context): Array<Signature> {
+        val pInfo: PackageInfo = pm.getPackageInfo(context.packageName, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) PackageManager.GET_SIGNING_CERTIFICATES
+        else PackageManager.GET_SIGNATURES)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) pInfo.signingInfo.apkContentsSigners else pInfo.signatures
     }
 
     @JvmStatic
