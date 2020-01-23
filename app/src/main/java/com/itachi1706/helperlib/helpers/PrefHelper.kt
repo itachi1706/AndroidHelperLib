@@ -29,6 +29,23 @@ object PrefHelper {
     }
 
     /**
+     * Wrapper to [Context.getSharedPreferences] without invoking StrictMode Disk Read Policy Violation
+     * @param context Context object
+     * @param name Name of Shared Preference File
+     * @param mode How to open the file in. Either [Context.MODE_PRIVATE], [Context.MODE_WORLD_READABLE], [Context.MODE_WORLD_WRITEABLE] or [Context.MODE_MULTI_PROCESS]
+     * @return SharedPreference singleton object
+     */
+    @JvmOverloads
+    @JvmStatic
+    fun getSharedPreferences(context: Context, name: String, mode: Int = Context.MODE_PRIVATE): SharedPreferences {
+        val old = StrictMode.getThreadPolicy()
+        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder(old).permitDiskReads().build())
+        val sp = context.getSharedPreferences(name, mode)
+        StrictMode.setThreadPolicy(old)
+        return sp
+    }
+
+    /**
      * Check if night mode is enabled
      * @param context Activity Context
      * @return false if Night mode is disabled, true otherwise
