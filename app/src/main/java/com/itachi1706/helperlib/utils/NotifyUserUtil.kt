@@ -17,9 +17,9 @@ object NotifyUserUtil {
      * @param message Message in Snackbar
      */
     @JvmStatic
-    fun showShortDismissSnackbar(currentLayout: View, message: String) {
+    fun showShortDismissSnackbar(currentLayout: View, message: CharSequence) {
         Snackbar.make(currentLayout, message, Snackbar.LENGTH_SHORT)
-            .setAction(R.string.snackbar_action_dismiss, View.OnClickListener { }).show()
+            .setAction(R.string.snackbar_action_dismiss) { }.show()
     }
 
     /**
@@ -28,7 +28,7 @@ object NotifyUserUtil {
      * @param message Message to display in Toast
      */
     @JvmStatic
-    fun createShortToast(context: Context, message: String) {
+    fun createShortToast(context: Context, message: CharSequence) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
