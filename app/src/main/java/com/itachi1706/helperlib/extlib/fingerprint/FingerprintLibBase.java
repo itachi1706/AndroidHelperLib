@@ -70,7 +70,8 @@ class FingerprintLibBase {
      * the key was generated.
      */
     protected boolean initCipher() {
-        return MarshmallowUtils.initCipher(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) return MarshmallowUtils.initCipher(this);
+        else return false;
     }
 
     /**

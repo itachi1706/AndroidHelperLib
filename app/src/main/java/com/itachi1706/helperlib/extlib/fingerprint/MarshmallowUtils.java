@@ -10,6 +10,7 @@ import android.os.Build;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ import javax.crypto.SecretKey;
  * @deprecated Slated for removal soon
  */
 @Deprecated
-@TargetApi(Build.VERSION_CODES.M)
+@RequiresApi(api = Build.VERSION_CODES.M)
 class MarshmallowUtils {
 
     private MarshmallowUtils() {
