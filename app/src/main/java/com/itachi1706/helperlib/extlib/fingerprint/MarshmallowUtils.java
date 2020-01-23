@@ -1,7 +1,6 @@
 package com.itachi1706.helperlib.extlib.fingerprint;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.PackageManager;

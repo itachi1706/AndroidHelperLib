@@ -2,6 +2,7 @@ package com.itachi1706.helperlib.helpers
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,16 +16,18 @@ object ConnectivityHelper {
     const val NO_CONNECTION = -1
 
     /**
-     * Gets the Network Info Object
+     * Gets the Network Info Object (Pre Android M)
      * @param context Context
      * @return Network Info
      */
+    @Suppress("DEPRECATION")
     @JvmStatic
     private fun getNetworkInfo(context: Context): NetworkInfo? {
         val cm = getConnectivityManager(context)
         return cm.activeNetworkInfo
     }
 
+    @Suppress("DEPRECATION")
     @JvmStatic
     private fun getNetworkType(networkInfo: NetworkInfo?): Int {
         return networkInfo?.type ?: NO_CONNECTION
@@ -40,6 +43,14 @@ object ConnectivityHelper {
         return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun getNetworkCapabilities(context: Context): NetworkCapabilities? {
+        val cm = getConnectivityManager(context)
+        val actNet = cm.activeNetwork ?: return null
+        return cm.getNetworkCapabilities(actNet) ?: null
+    }
+
     /**
      * Check if the android device has Internet
      * @param context Context
@@ -47,6 +58,19 @@ object ConnectivityHelper {
      */
     @JvmStatic
     fun hasInternetConnection(context: Context): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return hasInternetConnectionPreM(context)
+
+        val nc = getNetworkCapabilities(context) ?: return false
+        return when {
+            nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            nc.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun hasInternetConnectionPreM(context: Context): Boolean {
         val activeNetwork = getNetworkInfo(context)
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting
     }
@@ -56,10 +80,15 @@ object ConnectivityHelper {
      * @param context Context
      * @return True if WIFI, false otherwise
      */
+    @Suppress("DEPRECATION")
     @JvmStatic
     fun isWifiConnection(context: Context): Boolean {
-        val activeNetwork = getNetworkInfo(context)
-        return activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_WIFI
+        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            val activeNetwork = getNetworkInfo(context)
+            activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_WIFI
+        } else {
+            getNetworkCapabilities(context)?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ?: false
+        }
     }
 
     /**
@@ -67,10 +96,15 @@ object ConnectivityHelper {
      * @param context Context
      * @return True if Cellular (Mobile), false otherwise
      */
+    @Suppress("DEPRECATION")
     @JvmStatic
     fun isCellularConnection(context: Context): Boolean {
-        val activeNetwork = getNetworkInfo(context)
-        return activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_MOBILE
+        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            val activeNetwork = getNetworkInfo(context)
+            activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_MOBILE
+        } else {
+            getNetworkCapabilities(context)?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ?: false
+        }
     }
 
     /**

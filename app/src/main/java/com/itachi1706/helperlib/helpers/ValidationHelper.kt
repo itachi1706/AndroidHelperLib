@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.Signature
-import android.content.pm.SigningInfo
 import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import java.io.ByteArrayInputStream
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
