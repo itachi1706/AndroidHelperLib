@@ -81,4 +81,20 @@ object LogHelper {
     fun wtf(tag: String, message: String) {
         Log.wtf(tag, message)
     }
+
+    @JvmStatic
+    fun getLogLevelChar(logLevel: Int): Char {
+        return when (logLevel) {
+            Log.ERROR -> 'E'
+            Log.WARN -> 'W'
+            Log.DEBUG -> 'D'
+            Log.INFO -> 'I'
+            else -> 'V'
+        }
+    }
+
+    @JvmStatic
+    fun getGenericLogString(logLevel: Int, tag:String, message: String): String {
+        return "${getLogLevelChar(logLevel)}/$tag: $message"
+    }
 }
