@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -16,9 +18,10 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.internal.MDTintHelper
+import com.afollestad.materialdialogs.WhichButton
+import com.afollestad.materialdialogs.actions.getActionButton
+import com.afollestad.materialdialogs.customview.customView
 import com.itachi1706.helperlib.R
 
 /**
@@ -57,22 +60,21 @@ class FingerprintDialog : DialogFragment(), OnEditorActionListener, FingerprintL
         if (savedInstanceState != null) mStage =
             savedInstanceState.getSerializable("stage") as Stage?
         isCancelable = requireArguments().getBoolean("cancelable", true)
-        val dialog = MaterialDialog.Builder(requireActivity())
+
+        val dialog = MaterialDialog(requireActivity())
             .title(R.string.sign_in)
-            .customView(R.layout.fingerprint_dialog_container, false)
-            .positiveText(android.R.string.cancel)
-            .negativeText(R.string.use_password)
-            .autoDismiss(false)
-            .cancelable(requireArguments().getBoolean("cancelable", true))
-            .onPositive { materialDialog, dialogAction -> materialDialog.cancel() }
-            .onNegative { materialDialog, dialogAction ->
+            .customView(R.layout.fingerprint_dialog_container)
+            .positiveButton(android.R.string.cancel) { dialog -> dialog.cancel() }
+            .negativeButton(R.string.use_password) { dialog ->
                 if (mStage == Stage.FINGERPRINT) {
-                    goToBackup(materialDialog)
+                    goToBackup(dialog)
                 } else {
                     verifyPassword()
                 }
-            }.build()
-        val v = dialog.customView!!
+            }
+            .noAutoDismiss()
+            .cancelable(requireArguments().getBoolean("cancelable", true))
+        val v = dialog.customView()
         mFingerprintContent = v.findViewById(R.id.fingerprint_container)
         mBackupContent = v.findViewById(R.id.backup_container)
         mPassword = v.findViewById(R.id.password)
@@ -157,9 +159,9 @@ class FingerprintDialog : DialogFragment(), OnEditorActionListener, FingerprintL
     }
 
     private fun toggleButtonsEnabled(enabled: Boolean) {
-        val dialog = dialog as MaterialDialog?
-        dialog!!.getActionButton(DialogAction.POSITIVE).isEnabled = enabled
-        dialog.getActionButton(DialogAction.NEGATIVE).isEnabled = enabled
+        val dialog = dialog as MaterialDialog
+        dialog.getActionButton(WhichButton.POSITIVE).isEnabled = enabled
+        dialog.getActionButton(WhichButton.NEGATIVE).isEnabled = enabled
     }
 
     private fun verifyPassword() {
@@ -169,9 +171,9 @@ class FingerprintDialog : DialogFragment(), OnEditorActionListener, FingerprintL
 
     @SuppressLint("NewApi")
     fun notifyPasswordValidation(valid: Boolean) {
-        val dialog = dialog as MaterialDialog?
-        val positive: View = dialog!!.getActionButton(DialogAction.POSITIVE)
-        val negative: View = dialog.getActionButton(DialogAction.NEGATIVE)
+        val dialog = dialog as MaterialDialog
+        val positive: View = dialog.getActionButton(WhichButton.POSITIVE)
+        val negative: View = dialog.getActionButton(WhichButton.NEGATIVE)
         toggleButtonsEnabled(true)
         if (valid) {
             if (mStage == Stage.NEW_FINGERPRINT_ENROLLED &&
@@ -187,7 +189,7 @@ class FingerprintDialog : DialogFragment(), OnEditorActionListener, FingerprintL
         } else {
             mPasswordDescriptionTextView!!.setText(R.string.password_not_recognized)
             val red = ContextCompat.getColor(requireActivity(), R.color.material_red_500)
-            MDTintHelper.setTint(mPassword!!, red)
+            mPassword?.background?.colorFilter = PorterDuffColorFilter(red, PorterDuff.Mode.SRC_ATOP)
             (positive as TextView).setTextColor(red)
             (negative as TextView).setTextColor(red)
         }
@@ -210,14 +212,14 @@ class FingerprintDialog : DialogFragment(), OnEditorActionListener, FingerprintL
         if (dialog == null) return
         when (mStage) {
             Stage.FINGERPRINT -> {
-                dialog.setActionButton(DialogAction.POSITIVE, android.R.string.cancel)
-                dialog.setActionButton(DialogAction.NEGATIVE, R.string.use_password)
+                dialog.getActionButton(WhichButton.POSITIVE).text = resources.getString(android.R.string.cancel)
+                dialog.getActionButton(WhichButton.NEGATIVE).text = resources.getString(R.string.use_password)
                 mFingerprintContent!!.visibility = View.VISIBLE
                 mBackupContent!!.visibility = View.GONE
             }
             Stage.NEW_FINGERPRINT_ENROLLED, Stage.PASSWORD -> {
-                dialog.setActionButton(DialogAction.POSITIVE, android.R.string.cancel)
-                dialog.setActionButton(DialogAction.NEGATIVE, android.R.string.ok)
+                dialog.getActionButton(WhichButton.POSITIVE).text = resources.getString(android.R.string.cancel)
+                dialog.getActionButton(WhichButton.NEGATIVE).text = resources.getString(android.R.string.ok)
                 mFingerprintContent!!.visibility = View.GONE
                 mBackupContent!!.visibility = View.VISIBLE
                 if (mStage == Stage.NEW_FINGERPRINT_ENROLLED) {
@@ -248,7 +250,12 @@ class FingerprintDialog : DialogFragment(), OnEditorActionListener, FingerprintL
         if (activity == null) return
         mFingerprintIcon!!.setImageResource(R.drawable.ic_fingerprint_error)
         mFingerprintStatus!!.text = error
-        mFingerprintStatus!!.setTextColor(ContextCompat.getColor(requireActivity(), R.color.warning_color))
+        mFingerprintStatus!!.setTextColor(
+            ContextCompat.getColor(
+                requireActivity(),
+                R.color.warning_color
+            )
+        )
         mFingerprintStatus!!.removeCallbacks(mResetErrorTextRunnable)
         mFingerprintStatus!!.postDelayed(mResetErrorTextRunnable, ERROR_TIMEOUT_MILLIS)
     }
@@ -279,7 +286,12 @@ class FingerprintDialog : DialogFragment(), OnEditorActionListener, FingerprintL
         toggleButtonsEnabled(false)
         mFingerprintStatus!!.removeCallbacks(mResetErrorTextRunnable)
         mFingerprintIcon!!.setImageResource(R.drawable.ic_fingerprint_success)
-        mFingerprintStatus!!.setTextColor(ContextCompat.getColor(requireActivity(), R.color.success_color))
+        mFingerprintStatus!!.setTextColor(
+            ContextCompat.getColor(
+                requireActivity(),
+                R.color.success_color
+            )
+        )
         mFingerprintStatus!!.text = resources.getString(R.string.fingerprint_success)
         mFingerprintIcon!!.postDelayed({
             mCallback!!.onFingerprintDialogAuthenticated()

@@ -48,7 +48,7 @@ object ConnectivityHelper {
     private fun getNetworkCapabilities(context: Context): NetworkCapabilities? {
         val cm = getConnectivityManager(context)
         val actNet = cm.activeNetwork ?: return null
-        return cm.getNetworkCapabilities(actNet) ?: null
+        return cm.getNetworkCapabilities(actNet)
     }
 
     /**
