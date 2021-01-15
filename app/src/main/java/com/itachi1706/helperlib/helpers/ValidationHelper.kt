@@ -32,7 +32,7 @@ object ValidationHelper {
         val mergedList: MutableList<String> = ArrayList()
         mergedList.addAll(playstoreList)
         mergedList.addAll(amazonList)
-        val installer = context.packageManager.getInstallerPackageName(context.packageName)
+        val installer = getInstallLocation(context, context.packageName)
         return installer != null && mergedList.contains(installer)
     }
 
@@ -48,7 +48,14 @@ object ValidationHelper {
 
     @JvmStatic
     fun getInstallLocation(context: Context, packageName: String?): String? {
-        return context.packageManager.getInstallerPackageName(packageName)
+        if (packageName == null) return null
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val installInfo = context.packageManager.getInstallSourceInfo(packageName)
+            installInfo.installingPackageName
+        } else {
+            @Suppress("DEPRECATION")
+            context.packageManager.getInstallerPackageName(packageName)
+        }
     }
 
     @JvmStatic
