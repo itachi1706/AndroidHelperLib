@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DEPRECATED: Remove when not needed -->
+    <dimen name="md_dialog_frame_margin">24dp</dimen>
+    <dimen name="md_content_textsize">16sp</dimen>
+</resources>
