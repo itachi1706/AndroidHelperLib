@@ -60,4 +60,4 @@ These classes provides utility methods for aiding in specific tasks such as conv
 
 ### Fingerprint
 Handles fingerprint authentication with the Fingerprint API  
-*Note: This has been deprecated and is soon slated for removal. It is only present to provide time for applications to migrate. Users are recommended to use the [AndroidX Biometric API](https://developer.android.com/jetpack/androidx/releases/biometric) instead*
+*Note: This has been deprecated and WILL BE REMOVED AFTER VERSION 1.1.2. It is only present to provide time for applications to migrate. Users are strongly encouraged to use the [AndroidX Biometric API](https://developer.android.com/jetpack/androidx/releases/biometric) instead*
