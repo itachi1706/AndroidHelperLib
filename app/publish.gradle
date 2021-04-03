@@ -1,5 +1,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -89,6 +91,54 @@ bintray {
             desc = "Release ${this.version}"
             released = new Date()
             vcsTag = this.version
+        }
+    }
+}
+
+artifactoryPublish.dependsOn('build')
+publishing {
+    publications {
+        aar(MavenPublication) {
+            // from components.java
+            groupId = this.group
+            artifactId = 'helperlib'
+            version = this.version
+            // Tell maven to prepare the generated "*.aar" file for publishing
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
+}
+
+artifactoryPublish {
+    publications(publishing.publications.aar)
+}
+
+artifactory {
+    Properties localProps = new Properties()
+    def localPropFile = file('../local.properties')
+    if (localPropFile.canRead()) { localProps.load(new FileInputStream(localPropFile)) }
+
+    def userStr = localProps != null && localProps.containsKey('artifactory.user') ? localProps.getProperty('artifactory.user') : System.getenv('ARTIFACTORY_USER')
+    def passwordStr = localProps != null && localProps.containsKey('artifactory.password') ? localProps.getProperty('artifactory.password') : System.getenv('ARTIFACTORY_PASSWORD')
+    def urlStr = localProps != null && localProps.containsKey('artifactory.contextUrl') ? localProps.getProperty('artifactory.contextUrl') : System.getenv('ARTIFACTORY_CONTEXTURL')
+
+    contextUrl = "${urlStr}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'ccn-android-libs'
+            username = "${userStr}"
+            password = "${passwordStr}"
+            maven = true
+
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'ccn-android-libs-virt'
+            username = "${userStr}"
+            password = "${passwordStr}"
+            maven = true
+
         }
     }
 }
