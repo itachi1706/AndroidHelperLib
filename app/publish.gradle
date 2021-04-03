@@ -122,12 +122,12 @@ artifactory {
     def passwordStr = localProps != null && localProps.containsKey('artifactory.password') ? localProps.getProperty('artifactory.password') : System.getenv('ARTIFACTORY_PASSWORD')
     def urlStr = localProps != null && localProps.containsKey('artifactory.contextUrl') ? localProps.getProperty('artifactory.contextUrl') : System.getenv('ARTIFACTORY_CONTEXTURL')
 
-    contextUrl = "${urlStr}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    contextUrl = urlStr   //The base Artifactory URL if not overridden by the publisher/resolver
     publish {
         repository {
             repoKey = 'ccn-android-libs'
-            username = "${userStr}"
-            password = "${passwordStr}"
+            username = userStr
+            password = passwordStr
             maven = true
 
         }
@@ -135,8 +135,8 @@ artifactory {
     resolve {
         repository {
             repoKey = 'ccn-android-libs-virt'
-            username = "${userStr}"
-            password = "${passwordStr}"
+            username = userStr
+            password = passwordStr
             maven = true
 
         }
