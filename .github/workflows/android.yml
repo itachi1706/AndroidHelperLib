@@ -54,7 +54,7 @@ jobs:
           GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_SIGN_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
       - name: Move Library AAR file to main folder
-        run: mv ./\app/build/outputs/aar/app-release.aar ./helperlib-release.aar
+        run: mv ./helperlib/build/outputs/aar/helperlib-release.aar ./helperlib-release.aar
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.1.4
