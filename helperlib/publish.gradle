@@ -1,6 +1,8 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -67,6 +69,7 @@ install {
     }
 }
 
+// Bintray (Deprecated)
 bintray {
     Properties localProps = new Properties()
     def localPropFile = file('../local.properties')
@@ -94,6 +97,81 @@ bintray {
     }
 }
 
+afterEvaluate {
+    Properties localProps = new Properties()
+    def localPropFile = file('../local.properties')
+    if (localPropFile.canRead()) { localProps.load(new FileInputStream(localPropFile)) }
+
+    def ossrhUsername = localProps != null && localProps.containsKey('ossrhUsername') ? localProps.getProperty('ossrhUsername') : System.getenv('OSSRH_USER')
+    def ossrhPassword = localProps != null && localProps.containsKey('ossrhPassword') ? localProps.getProperty('ossrhPassword') : System.getenv('OSSRH_PASSWORD')
+
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        repositories {
+            maven {
+                def releaseRepo = "https://s01.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotRepo = "https://s01.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? releaseRepo : snapshotRepo
+                credentials {
+                    username = ossrhUsername
+                    password = ossrhPassword
+                }
+            }
+        }
+        publications {
+            aar(MavenPublication) {
+                from components.release
+                groupId = this.group
+                artifactId = 'helperlib'
+                version = this.version
+
+                pom {
+                    name = 'Android Helper Library'
+                    description = 'Various Helper classes for Android Projects'
+                    url = 'https://github.com/itachi1706/AndroidHelperLib'
+                    inceptionYear = '2016'
+                    packaging = 'aar'
+
+                    licenses {
+                        license {
+                            name = 'The MIT License (MIT)'
+                            url = 'https://opensource.org/licenses/MIT'
+                        }
+                    }
+                    scm {
+                        connection = 'https://github.com/itachi1706/AndroidHelperLib.git'
+                        url = 'https://github.com/itachi1706/AndroidHelperLib'
+
+                    }
+                    developers {
+                        developer {
+                            id = 'itachi1706'
+                            name = 'Kenneth'
+                        }
+                    }
+                }
+
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact(sourcesJar)
+                artifact(javadocJar)
+                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            }
+        }
+    }
+
+    signing {
+        def signingKey = localProps != null && localProps.containsKey('signing.key') ? localProps.getProperty('signing.key') : System.getenv('GPG_SIGN_KEY')
+        def signingPassword = localProps != null && localProps.containsKey('signing.password') ? localProps.getProperty('signing.password') : System.getenv('GPG_SIGN_PASSWORD')
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications.aar
+    }
+
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
+}
+
+// Artifactory
 artifactory {
     Properties localProps = new Properties()
     def localPropFile = file('../local.properties')
@@ -110,12 +188,6 @@ artifactory {
             username = userStr
             password = passwordStr
             maven = true
-        }
-        defaults {
-            publishConfigs('archives')
-            publishArtifacts = true
-            publishPom = true
-            publishIvy = false
         }
     }
     resolve {

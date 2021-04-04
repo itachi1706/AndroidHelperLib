@@ -8,11 +8,39 @@ AndroidHelperLib
 [![Test Coverage](https://codeclimate.com/github/itachi1706/AndroidHelperLib/badges/coverage.svg)](https://codeclimate.com/github/itachi1706/AndroidHelperLib/coverage) 
 [![Issue Count](https://codeclimate.com/github/itachi1706/AndroidHelperLib/badges/issue_count.svg)](https://codeclimate.com/github/itachi1706/AndroidHelperLib)
 
-**NOTE: We are in the midst of allowing an easier way to access through JCenter, use the Bintray method in the meantime**
+**NOTE: We are in the midst of allowing an easier way to access through Maven Central, use the Artifactory method in the meantime**
 
 This library contains various helper classes for use in Android-based projects
 
-## Usage - Bintray
+## Usage - Artifactory
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+repositories {
+	maven {
+		url "https://itachi1706.jfrog.io/artifactory/ccn-android-libs/"
+	}
+}
+…
+dependencies {
+  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See bintray badge for latest version
+}
+```
+
+## Usage - Maven Central (WIP)
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+repositories {
+	mavenCentral()
+}
+…
+dependencies {
+  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See bintray badge for latest version
+}
+```
+
+## Usage - Bintray (Deprecated)
 To use this library in an Android Project, add the following lines into your app-level build.gradle file
 
 ```gradle
@@ -27,10 +55,13 @@ dependencies {
 }
 ```
 
-## Usage - JCenter
+## Usage - JCenter (Deprecated)
 To use this library in an Android Project, add the following lines into your app-level build.gradle file
 
 ```gradle
+repositories {
+	jcenter()
+}
 dependencies {
   implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See Bintray badge for latest version number
 }
