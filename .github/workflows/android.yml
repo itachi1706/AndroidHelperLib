@@ -51,6 +51,8 @@ jobs:
           ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORYCONTEXTURL }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORYPASSWORD }}
           ARTIFACTORY_USER: ${{ secrets.ARTIFACTORYUSER }}
+          GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          GPG_SIGN_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
       - name: Move Library AAR file to main folder
         run: mv ./\app/build/outputs/aar/app-release.aar ./helperlib-release.aar
       - name: Create Release
