@@ -95,22 +95,28 @@ bintray {
     }
 }
 
-artifactoryPublish.dependsOn('build')
-publishing {
-    publications {
-        aar(MavenPublication) {
-            // from components.java
-            groupId = this.group
-            artifactId = 'helperlib'
-            version = this.version
-            // Tell maven to prepare the generated "*.aar" file for publishing
-            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+
+afterEvaluate {
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        publications {
+            aar(MavenPublication) {
+                from components.release
+                //from components.java
+                groupId = this.group
+                artifactId = 'helperlib'
+                version = this.version
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact(sourcesJar)
+                artifact(javadocJar)
+                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            }
         }
     }
-}
 
-artifactoryPublish {
-    publications(publishing.publications.aar)
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
 }
 
 artifactory {
