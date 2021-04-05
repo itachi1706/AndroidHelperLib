@@ -1,6 +1,6 @@
 AndroidHelperLib
 =======
-[![Bintray](https://img.shields.io/bintray/v/itachi1706/ccn-android-lib/helper-lib-android)](https://bintray.com/itachi1706/ccn-android-lib/helper-lib-android/_latestVersion)
+[![Maven Central](https://img.shields.io/maven-central/v/com.itachi1706.helpers/helperlib)](https://search.maven.org/artifact/com.itachi1706.helpers/helperlib)
 [![GitHub Actions](https://github.com/itachi1706/AndroidHelperLib/workflows/Android%20CI/badge.svg)](https://github.com/itachi1706/AndroidHelperLib/actions)
 [![GitHub release](https://img.shields.io/github/release/itachi1706/AndroidHelperLib.svg)](https://github.com/itachi1706/AndroidHelperLib/releases) 
 [![GitHub license](https://img.shields.io/github/license/itachi1706/AndroidHelperLib.svg)](https://github.com/itachi1706/AndroidHelperLib/blob/master/LICENSE) 
@@ -8,9 +8,20 @@ AndroidHelperLib
 [![Test Coverage](https://codeclimate.com/github/itachi1706/AndroidHelperLib/badges/coverage.svg)](https://codeclimate.com/github/itachi1706/AndroidHelperLib/coverage) 
 [![Issue Count](https://codeclimate.com/github/itachi1706/AndroidHelperLib/badges/issue_count.svg)](https://codeclimate.com/github/itachi1706/AndroidHelperLib)
 
-**NOTE: We are in the midst of allowing an easier way to access through Maven Central, use the Artifactory method in the meantime**
-
 This library contains various helper classes for use in Android-based projects
+
+## Usage - Maven Central
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+repositories {
+	mavenCentral()
+}
+…
+dependencies {
+  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See badge for latest version
+}
+```
 
 ## Usage - Artifactory
 To use this library in an Android Project, add the following lines into your app-level build.gradle file
@@ -23,20 +34,7 @@ repositories {
 }
 …
 dependencies {
-  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See bintray badge for latest version
-}
-```
-
-## Usage - Maven Central (WIP)
-To use this library in an Android Project, add the following lines into your app-level build.gradle file
-
-```gradle
-repositories {
-	mavenCentral()
-}
-…
-dependencies {
-  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See bintray badge for latest version
+  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See badge for latest version
 }
 ```
 
@@ -51,7 +49,7 @@ repositories {
 }
 …
 dependencies {
-  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See bintray badge for latest version
+  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See badge for latest version
 }
 ```
 
@@ -63,7 +61,7 @@ repositories {
 	jcenter()
 }
 dependencies {
-  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See Bintray badge for latest version number
+  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See badge for latest version number
 }
 ```
 
