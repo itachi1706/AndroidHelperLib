@@ -38,37 +38,10 @@ dependencies {
 }
 ```
 
-## Usage - Bintray (Deprecated)
-To use this library in an Android Project, add the following lines into your app-level build.gradle file
-
-```gradle
-repositories {
-	maven {
-		url  "https://dl.bintray.com/itachi1706/ccn-android-lib"
-	}
-}
-…
-dependencies {
-  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See badge for latest version
-}
-```
-
-## Usage - JCenter (Deprecated)
-To use this library in an Android Project, add the following lines into your app-level build.gradle file
-
-```gradle
-repositories {
-	jcenter()
-}
-dependencies {
-  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See badge for latest version number
-}
-```
-
 ## Helper Classes in the library
 
 ### Deprecation Classes
-These classes act basically as a compatability layer for versions of Android, using the newer APIs when possible and falling back to deprecated APIs when the new APIs are not available  
+These classes act basically as a compatibility layer for versions of Android, using the newer APIs when possible and falling back to deprecated APIs when the new APIs are not available  
 * [HTML](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/HtmlDep.kt) - Handles HTML text formatting for TextViews
 * [StatFs](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/StatFsDep.kt) - Compatibility methods for handling file sizes
 * [TextView](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/deprecation/TextViewDep.kt) - Handles the method of setting text appearance of a TextView
