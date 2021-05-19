@@ -59,7 +59,3 @@ These classes provides utility methods for aiding in specific tasks such as conv
 * [Bitmap](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/utils/BitmapUtil.kt) - Retrieve bitmap from various places (drawable, vectors etc)
 * [Color](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/utils/ColorUtil.kt) - Obtain color from attributes
 * [User Notification](https://github.com/itachi1706/AndroidHelperLib/blob/master/app/src/main/java/com/itachi1706/helperlib/utils/NotifyUserUtil.kt) - Quick  Snackbar and Toast messages notifications
-
-### Fingerprint
-Handles fingerprint authentication with the Fingerprint API  
-*Note: This has been deprecated and WILL BE REMOVED AFTER VERSION 1.1.2. It is only present to provide time for applications to migrate. Users are strongly encouraged to use the [AndroidX Biometric API](https://developer.android.com/jetpack/androidx/releases/biometric) instead*
