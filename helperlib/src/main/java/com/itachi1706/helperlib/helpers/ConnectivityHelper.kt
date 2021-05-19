@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.itachi1706.helperlib.helpers
 
 import android.content.Context
