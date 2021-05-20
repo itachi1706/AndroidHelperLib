@@ -20,9 +20,9 @@ import java.util.*
  */
 object ValidationHelper {
 
-    private const val SIDELOAD = 0
-    private const val GOOGLE_PLAY = 1 //com.android.vending, com.google.android.feedback
-    private const val AMAZON = 2 //com.amazon.venezia
+    const val SIDELOAD = 0
+    const val GOOGLE_PLAY = 1 //com.android.vending, com.google.android.feedback
+    const val AMAZON = 2 //com.amazon.venezia
 
     private val playstoreList: List<String> = ArrayList(listOf("com.android.vending", "com.google.android.feedback"))
     private val amazonList: List<String> = ArrayList(listOf("com.amazon.venezia"))
