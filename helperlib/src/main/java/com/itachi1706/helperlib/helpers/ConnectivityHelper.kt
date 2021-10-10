@@ -89,7 +89,8 @@ object ConnectivityHelper {
             val activeNetwork = getNetworkInfo(context)
             activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_WIFI
         } else {
-            getNetworkCapabilities(context)?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ?: false
+            getNetworkCapabilities(context)?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                ?: false
         }
     }
 
@@ -105,7 +106,8 @@ object ConnectivityHelper {
             val activeNetwork = getNetworkInfo(context)
             activeNetwork != null && getNetworkType(activeNetwork) == ConnectivityManager.TYPE_MOBILE
         } else {
-            getNetworkCapabilities(context)?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ?: false
+            getNetworkCapabilities(context)?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                ?: false
         }
     }
 
@@ -128,15 +130,13 @@ object ConnectivityHelper {
     @JvmStatic
     fun shouldThrottle(context: Context): Boolean {
         val manager = getConnectivityManager(context)
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (manager.isActiveNetworkMetered) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    when (manager.restrictBackgroundStatus) {
-                        ConnectivityManager.RESTRICT_BACKGROUND_STATUS_ENABLED -> true
-                        ConnectivityManager.RESTRICT_BACKGROUND_STATUS_WHITELISTED, ConnectivityManager.RESTRICT_BACKGROUND_STATUS_DISABLED -> false
-                        else -> false
-                    }
-                } else false
+        return if (manager.isActiveNetworkMetered) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                when (manager.restrictBackgroundStatus) {
+                    ConnectivityManager.RESTRICT_BACKGROUND_STATUS_ENABLED -> true
+                    ConnectivityManager.RESTRICT_BACKGROUND_STATUS_WHITELISTED, ConnectivityManager.RESTRICT_BACKGROUND_STATUS_DISABLED -> false
+                    else -> false
+                }
             } else false
         } else false
     }

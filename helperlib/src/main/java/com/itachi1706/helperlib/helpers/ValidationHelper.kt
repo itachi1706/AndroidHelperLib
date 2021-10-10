@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException
 import java.security.cert.CertificateException
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
-import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by Kenneth on 30/12/2019.
@@ -21,17 +21,20 @@ import java.util.*
 object ValidationHelper {
 
     const val SIDELOAD = 0
-    const val GOOGLE_PLAY = 1 //com.android.vending, com.google.android.feedback
-    const val AMAZON = 2 //com.amazon.venezia
+    const val GOOGLE_PLAY = 1 // com.android.vending, com.google.android.feedback
+    const val AMAZON = 2 // com.amazon.venezia
+    const val HUAWEI = 3 // com.huawei.appmarket
 
     private val playstoreList: List<String> = ArrayList(listOf("com.android.vending", "com.google.android.feedback"))
     private val amazonList: List<String> = ArrayList(listOf("com.amazon.venezia"))
+    private val huaweiList: List<String> = ArrayList(listOf("com.huawei.appmarket"))
 
     @JvmStatic
     fun checkNotSideloaded(context: Context): Boolean {
         val mergedList: MutableList<String> = ArrayList()
         mergedList.addAll(playstoreList)
         mergedList.addAll(amazonList)
+        mergedList.addAll(huaweiList)
         val installer = getInstallLocation(context, context.packageName)
         return installer != null && mergedList.contains(installer)
     }
@@ -67,6 +70,7 @@ object ValidationHelper {
     fun checkInstallLocation(context: Context, packageName: String?): Int {
         val installer = getInstallLocation(context, packageName) ?: return SIDELOAD
         if (playstoreList.contains(installer)) return GOOGLE_PLAY
+        else if (huaweiList.contains(installer)) return HUAWEI
         return if (amazonList.contains(installer)) AMAZON else SIDELOAD
     }
 
