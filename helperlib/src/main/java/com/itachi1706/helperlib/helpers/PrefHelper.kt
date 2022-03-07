@@ -20,7 +20,7 @@ object PrefHelper {
      * @return SharedPreference singleton object
      */
     @JvmStatic
-    fun getDefaultSharedPreferences(context: Context?): SharedPreferences {
+    fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         val old = StrictMode.getThreadPolicy()
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder(old).permitDiskReads().build())
         val sp = PreferenceManager.getDefaultSharedPreferences(context)
