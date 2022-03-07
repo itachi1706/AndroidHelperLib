@@ -1,7 +1,8 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
 package com.itachi1706.helperlib.concurrent
 
+import android.content.Context
 import com.itachi1706.helperlib.concurrent.Constants.Status
 import com.itachi1706.helperlib.helpers.LogHelper
 import kotlinx.coroutines.*
@@ -10,9 +11,9 @@ import java.util.concurrent.Executors
 /**
  * Replacement of AsyncTask in Kotlin Coroutine format
  */
-abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String) {
+abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String, val context: Context) {
 
-    val logTAG by lazy {
+    private val logTAG by lazy {
         CoroutineAsyncTask::class.java.simpleName
     }
 
@@ -63,7 +64,7 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
         status = Status.RUNNING
 
         // Needs access to main thread as it can setup UI
-        GlobalScope.launch(Dispatchers.Main) {
+        CoroutineScope(Dispatchers.Main).launch {
             preJob = launch(Dispatchers.Main) {
                 printLog("$taskName onPreExecute started")
                 onPreExecute()
@@ -93,7 +94,7 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
             isCancelled = true
             status = Status.FINISHED
             if (bgJob!!.isCompleted) {
-                GlobalScope.launch(Dispatchers.Main) {
+                CoroutineScope(Dispatchers.Main).launch {
                     onCancelled(bgJob!!.await())
                 }
             }
@@ -104,7 +105,7 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
     }
 
     fun publishProgress(vararg progress: Progress) {
-        GlobalScope.launch(Dispatchers.Main) {
+        CoroutineScope(Dispatchers.Main).launch {
             if (!isCancelled) {
                 onProgressUpdate(*progress)
             }
