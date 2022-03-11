@@ -2,7 +2,6 @@
 
 package com.itachi1706.helperlib.concurrent
 
-import android.content.Context
 import com.itachi1706.helperlib.concurrent.Constants.Status
 import com.itachi1706.helperlib.helpers.LogHelper
 import kotlinx.coroutines.*
@@ -11,7 +10,7 @@ import java.util.concurrent.Executors
 /**
  * Replacement of AsyncTask in Kotlin Coroutine format
  */
-abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String, val context: Context) {
+abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String) {
 
     private val logTAG by lazy {
         CoroutineAsyncTask::class.java.simpleName
