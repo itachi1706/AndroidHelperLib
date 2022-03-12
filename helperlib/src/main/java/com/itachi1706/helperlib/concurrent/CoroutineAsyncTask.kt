@@ -28,7 +28,7 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
     open fun onPostExecute(result: Result?) {}
     open fun onPreExecute() {}
     open fun onCancelled(result: Result?) {}
-    protected var isCancelled = false
+    var isCancelled = false
 
     /**
      * Executes background task parallel with other background tasks in the queue using
