@@ -18,6 +18,7 @@ import kotlin.collections.ArrayList
  * Created by Kenneth on 30/12/2019.
  * for com.itachi1706.helperlib.helpers in Helper Library
  */
+@Suppress("unused")
 object ValidationHelper {
 
     const val SIDELOAD = 0

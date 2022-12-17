@@ -22,6 +22,7 @@ import javax.net.ssl.SSLException
  * @property timeout Int
  * @constructor Construct URLHelper with a URL object
  */
+@Suppress("unused")
 class URLHelper(url: URL) {
 
     companion object {

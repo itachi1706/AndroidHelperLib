@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi
  * for com.itachi1706.helperlib.helpers in Helper Library
  * NOTE: Requires android.permission.ACCESS_NETWORK_STATE permission
  */
+@Suppress("unused")
 object ConnectivityHelper {
     const val NO_CONNECTION = -1
 

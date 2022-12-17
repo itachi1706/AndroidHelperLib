@@ -8,7 +8,7 @@ import android.widget.TextView
  * Created by Kenneth on 30/12/2019.
  * for com.itachi1706.helperlib.deprecation in Helper Library
  */
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "unused")
 object TextViewDep {
     @JvmStatic
     fun setTextAppearance(textView: TextView, context: Context?, resId: Int) {

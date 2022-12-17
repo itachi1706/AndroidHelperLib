@@ -15,6 +15,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
  * Created by Kenneth on 30/12/2019.
  * for com.itachi1706.helperlib.helpers in Helper Library
  */
+@Suppress("unused")
 object BitmapUtil {
     @JvmStatic
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

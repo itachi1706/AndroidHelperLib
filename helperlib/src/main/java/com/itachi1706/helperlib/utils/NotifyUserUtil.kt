@@ -10,6 +10,7 @@ import com.itachi1706.helperlib.R
  * Created by Kenneth on 30/12/2019.
  * for com.itachi1706.helperlib.utils in Helper Library
  */
+@Suppress("unused")
 object NotifyUserUtil {
     /**
      * Creates a short dismissible snackbar popup

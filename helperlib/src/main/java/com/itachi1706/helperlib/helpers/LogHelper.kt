@@ -7,6 +7,7 @@ import com.itachi1706.helperlib.interfaces.LogHandler
  * Created by Kenneth on 15/1/2020.
  * for com.itachi1706.helperlib.helpers in Helper Library
  */
+@Suppress("unused")
 object LogHelper {
 
     private var externalLog: LogHandler? = null

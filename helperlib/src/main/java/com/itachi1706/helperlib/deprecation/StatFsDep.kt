@@ -7,7 +7,7 @@ import android.os.StatFs
  * Created by Kenneth on 30/12/2019.
  * for com.itachi1706.helperlib.deprecation in Helper Library
  */
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "unused")
 object StatFsDep {
     @JvmStatic
     fun getBlockSize(statFs: StatFs): Long {

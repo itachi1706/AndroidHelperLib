@@ -13,6 +13,7 @@ import androidx.preference.PreferenceManager
  * Created by Kenneth on 30/12/2019.
  * for com.itachi1706.helperlib.helpers in Helper Library
  */
+@Suppress("unused")
 object PrefHelper {
     /**
      * Wrapper to [PreferenceManager.getDefaultSharedPreferences] without invoking StrictMode Disk Read Policy Violation
