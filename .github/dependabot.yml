@@ -12,6 +12,6 @@ updates:
       interval: "daily"
   # Maintain dependencies for Gradle Android
   - package-ecosystem: "gradle"
-    directory: "/app"
+    directory: "/helperlib"
     schedule:
       interval: "daily"
