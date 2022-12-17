@@ -83,7 +83,7 @@ class URLHelper(url: URL) {
 
     @WorkerThread
     @Throws(IOException::class)
-    private fun processHttpConnection(): String? {
+    private fun processHttpConnection(): String {
         val conn = url!!.openConnection() as HttpURLConnection
         conn.connectTimeout = if (timeout == -1) HTTP_QUERY_TIMEOUT else timeout
         conn.readTimeout = if (timeout == -1) HTTP_QUERY_TIMEOUT else timeout
