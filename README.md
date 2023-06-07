@@ -23,8 +23,16 @@ dependencies {
 }
 ```
 
-## Usage - Artifactory
+## Usage - GitHub Packages
 To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+Coming Soon
+```
+
+## Usage - Artifactory (DEPRECATED)
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+Note: If you are using artifactory, Move to GitHub Packages or Maven Central ASAP. This repo will be removed soon
 
 ```gradle
 repositories {
