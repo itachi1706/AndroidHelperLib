@@ -39,6 +39,8 @@ jobs:
           OSSRH_USER: ${{ secrets.OSSRHUSER }}
           GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_SIGN_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Move Library AAR file to main folder
         run: mv ./helperlib/build/outputs/aar/helperlib-release.aar ./helperlib-release.aar
       - name: Update CHANGELOG
