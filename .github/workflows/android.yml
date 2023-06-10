@@ -17,6 +17,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Test Publishing
+      run: ./gradlew clean build signAarPublication publishAarPublicationToMavenLocal
   mavenCentral:
     name: Release to Maven Central
     if: startsWith(github.ref, 'refs/tags/')
