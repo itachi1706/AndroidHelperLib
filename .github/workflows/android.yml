@@ -38,7 +38,8 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x gradlew
       - name: Generate Local Properties file
-        GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+        env:
+          GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
         run: echo $GPG_SIGN_KEY | base64 --decode > ./local.properties
       - name: Generate artifact, publish release and upload to Maven Central and GitHub Packages
         run: ./gradlew clean build signAarPublication publish
