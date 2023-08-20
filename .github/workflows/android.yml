@@ -17,10 +17,13 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Generate Local Properties file
+      env:
+        GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+      run: echo $GPG_SIGN_KEY | base64 --decode > ./local.properties
     - name: Local publishing test to ensure working
       run: ./gradlew clean build signAarPublication publishAarPublicationToMavenLocal
       env:
-        GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
         GPG_SIGN_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
   mavenCentral:
     name: Release to Maven Central
