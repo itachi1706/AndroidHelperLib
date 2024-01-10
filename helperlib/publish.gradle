@@ -51,28 +51,13 @@ afterEvaluate {
     def ghUser = localProps != null && localProps.containsKey('gpr.user') ? localProps.getProperty('gpr.user') : System.getenv('GITHUB_ACTOR')
     def ghKey = localProps != null && localProps.containsKey('gpr.key') ? localProps.getProperty('gpr.key') : System.getenv('GITHUB_TOKEN')
 
-    def sonaReleaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-    def sonaSnapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-
     publishing {
         repositories {
             maven {
-                name = "SonatypeSnapshot"
-//                def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-//                def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-//                url = version.endsWith('SNAPSHOT') ? snapshotRepo : releaseRepo
-                url = sonaSnapshotRepo
-                credentials {
-                    username = ossrhUsername
-                    password = ossrhPassword
-                }
-            }
-            maven {
                 name = "sonatype"
-//                def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-//                def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-//                url = version.endsWith('SNAPSHOT') ? snapshotRepo : releaseRepo
-                url = sonaReleaseRepo
+                def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotRepo : releaseRepo
                 credentials {
                     username = ossrhUsername
                     password = ossrhPassword
