@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 
-@Suppress("DEPRECATION", "UnspecifiedImmutableFlag", "Unused")
+@Suppress("UnspecifiedImmutableFlag", "Unused")
 object PendingIntentDep {
 
     @JvmStatic
