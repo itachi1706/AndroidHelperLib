@@ -45,7 +45,7 @@ jobs:
           GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
         run: echo $GPG_SIGN_KEY | base64 --decode > ./local.properties
       - name: Generate artifact, publish release and upload to Maven Central and GitHub Packages
-        run: ./gradlew clean build publishReleasePublicationToSonatypeRepository publishReleasePublicationsToGHPackagesRepository
+        run: ./gradlew clean build publish
         env:
           OSSRH_PASSWORD: ${{ secrets.OSSRHPASSWORD }}
           OSSRH_USER: ${{ secrets.OSSRHUSER }}
