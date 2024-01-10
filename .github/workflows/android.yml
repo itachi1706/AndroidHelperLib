@@ -22,8 +22,16 @@ jobs:
         GPG_SIGN_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       run: echo $GPG_SIGN_KEY | base64 --decode > ./local.properties
     - name: Local publishing test to ensure working
-      run: ./gradlew clean build signAarPublication publishAarPublicationToMavenLocal
+      run: ./gradlew clean build publishReleasePublicationToMavenLocal
       env:
+        GPG_SIGN_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
+    # If master branch, release to sonatype snapshot
+    - name: Release to Sonatype Snapshot Repo
+      if: github.ref == 'refs/heads/master'
+      run: ./gradlew publishReleasePublicationToSonatypeSnapshotRepository
+      env:
+        OSSRH_PASSWORD: ${{ secrets.OSSRHPASSWORD }}
+        OSSRH_USER: ${{ secrets.OSSRHUSER }}
         GPG_SIGN_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
   mavenCentral:
     name: Release to Maven Central
