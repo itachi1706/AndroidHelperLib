@@ -65,7 +65,7 @@ afterEvaluate {
             }
             maven {
                 name = "GHPackages"
-                url = uri("https://maven.pkg.github.com/itachi1706/AndroidHelperLib")
+                url = uri(GH_PACKAGES_URI)
                 credentials {
                     username = ghUser
                     password = ghKey
