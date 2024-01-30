@@ -38,20 +38,11 @@ dependencies {
 }
 ```
 
-## Usage - Artifactory (DEPRECATED)
-To use this library in an Android Project, add the following lines into your app-level build.gradle file
-Note: If you are using artifactory, Move to GitHub Packages or Maven Central ASAP. This repo will be removed soon
+## API Helper Usage
+To use the API Helper, you will need to add the following lines into your `AndroidManifest.xml` file
 
-```gradle
-repositories {
-	maven {
-		url "https://itachi1706.jfrog.io/artifactory/ccn-android-libs/"
-	}
-}
-…
-dependencies {
-  implementation 'com.itachi1706.helpers:helperlib:<latest-version>' // See badge for latest version
-}
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
 ```
 
 ## Helper Classes in the library
