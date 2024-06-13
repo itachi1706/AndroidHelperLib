@@ -12,5 +12,6 @@ sonarqube {
         property "sonar.organization", "itachi1706"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.androidLint.reportPaths", "helperlib/build/reports/lint-results-debug.xml"
+        property "sonar.projectVersion", "${project(':helperlib').android.defaultConfig.versionName}"
     }
 }
