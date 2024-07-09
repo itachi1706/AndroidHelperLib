@@ -12,7 +12,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 16
+        minSdk = 19
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -67,4 +67,4 @@ dependencies {
 }
 
 // Apply the publish.gradle file
-apply(from = "publish.gradle")
+apply(from = "./publish.gradle")
