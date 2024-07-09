@@ -1,0 +1,32 @@
+[versions]
+androidLibrary = "8.5.0"
+appcompat = "1.7.0"
+coreKtx = "1.13.1"
+espressoCore = "3.6.1"
+junit = "1.2.1"
+junitVersion = "4.13.2"
+kotlinAndroid = "2.0.0"
+kotlinSerialization = "2.0.0"
+kotlinxSerializationJson = "1.7.1"
+material = "1.12.0"
+preferenceKtx = "1.2.1"
+sonarqube = "5.1.0.4882"
+volley = "1.2.1"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junit" }
+androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
+junit = { module = "junit:junit", version.ref = "junitVersion" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+volley = { module = "com.android.volley:volley", version.ref = "volley" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "androidLibrary" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
+
