@@ -6,21 +6,171 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.itachi1706.helperlib.exceptions.ApiException
 import com.itachi1706.helperlib.objects.ApiResponse
 import kotlinx.serialization.json.Json
 
-@Suppress("unused")
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 /**
  * API Call Handling class
  * @param context Context
  * @param baseUrl Base URL to use (Default: https://api.itachi1706.com)
  * @param tag Tag to use for Volley Request Queue (Default: DEFAULT)
+ * @param extraHeaders Extra Headers to add to the request (Default: None)
+ * @param defaultAuthentication Whether to add default authentication headers (Default: False)
+ * @see ApiCallListener
+ * @see ApiResponse
  */
 class ApiCallsHelper(
-    context: Context,
+    private val context: Context,
     private val baseUrl: String = DEFAULT_URL,
-    private val tag: String = "DEFAULT"
+    private val tag: String = "DEFAULT",
+    private val extraHeaders: MutableMap<String, String> = mutableMapOf(),
+    private val defaultAuthentication: Boolean = false
 ) {
+
+    /**
+     * Builder class for ApiCallsHelper
+     *
+     * This is used to create a Java-styled Builder Pattern ([build]) or if you wish to make single HTTP requests ([makeRequest])
+     *
+     * Note: For if calling [makeRequest] for Single HTTP requests, [callback] MUST be set via [setCallback] or an [ApiException] will be thrown
+     *
+     * @param context Context
+     * @see ApiCallsHelper
+     * @see ApiException
+     * @throws ApiException If [callback] is not set. Ensure that [setCallback] is called before calling this method
+     */
+    class Builder(private val context: Context) {
+
+        // Create variables
+        private var baseUrl: String = DEFAULT_URL
+        private var tag: String = "DEFAULT"
+        private var extraHeaders: MutableMap<String, String> = mutableMapOf()
+        private var defaultAuthentication: Boolean = false
+
+        // If not just building
+        private var callback: ApiCallListener? = null
+        private var method: Int = Request.Method.GET
+        private var data: String? = null
+
+        /**
+         * Set the base URL to use for API calls
+         * @param baseUrl Base URL to use defaults to [DEFAULT_URL]
+         */
+        fun setBaseUrl(baseUrl: String): Builder {
+            this.baseUrl = baseUrl
+            return this
+        }
+
+        /**
+         * Set the tag to use for Volley Request Queue
+         * @param tag Tag to use defaults to "DEFAULT"
+         */
+        fun setTag(tag: String): Builder {
+            this.tag = tag
+            return this
+        }
+
+        /**
+         * Set extra headers to add to the request
+         * @param extraHeaders Extra Headers to add to the request
+         */
+        fun setExtraHeaders(extraHeaders: MutableMap<String, String>): Builder {
+            this.extraHeaders = extraHeaders
+            return this
+        }
+
+        /**
+         * Add an extra header to the request. If the header already exists, it will be overwritten
+         * @param key Key of the header
+         * @param value Value of the header
+         */
+        fun addHeaders(key: String, value: String): Builder {
+            this.extraHeaders[key] = value
+            return this
+        }
+
+        /**
+         * Set whether to add default authentication headers
+         * @param defaultAuthentication Whether to add default authentication headers
+         */
+        fun setDefaultAuthentication(defaultAuthentication: Boolean): Builder {
+            this.defaultAuthentication = defaultAuthentication
+            return this
+        }
+
+        /**
+         * Set the callback to use for API calls
+         * @param callback Callback to use for API calls
+         * @see ApiCallListener
+         */
+        fun setCallback(callback: ApiCallListener): Builder {
+            this.callback = callback
+            return this
+        }
+
+        /**
+         * Set the method to use for API calls
+         * @param method Method to use for API calls
+         */
+        fun setMethod(method: Int): Builder {
+            this.method = method
+            return this
+        }
+
+        /**
+         * Set the data to use for API calls
+         * @param data Data to use for API calls
+         */
+        fun setBody(data: String): Builder {
+            this.data = data
+            return this
+        }
+
+        /**
+         * Builds the [ApiCallsHelper]
+         * @return [ApiCallsHelper]
+         */
+        fun build(): ApiCallsHelper {
+            return ApiCallsHelper(context, baseUrl, tag, extraHeaders, defaultAuthentication)
+        }
+
+        /**
+         * Makes a request to the API. If [callback] is not set, an [ApiException] will be thrown
+         *
+         * Results will be returned via [callback]
+         *
+         * @throws ApiException If [callback] is not set. Ensure that [setCallback] is called before calling this method
+         */
+        fun makeRequest() {
+            // Validate that listener is set
+            if (callback == null) {
+                throw ApiException("Callback is not set")
+            }
+
+            val helper = ApiCallsHelper(context, baseUrl, tag, extraHeaders, defaultAuthentication)
+            helper.internalCallHandling(method, baseUrl, data, callback!!)
+        }
+    }
+
+    /**
+     * Gets the default authentication headers
+     * @return Default authentication headers
+     */
+    private fun getDefaultAuthenticationHeaders(): Map<String, String> {
+        val packageName = this.context.packageName
+        val signature = ValidationHelper.getSignatureForValidation(this.context)
+
+        if (defaultAuthentication) {
+            return mapOf(
+                "X-Package-Name" to packageName,
+                "X-Signature" to signature
+            )
+        }
+        return mapOf()
+    }
+
 
     /**
      * Volley Request Queue
@@ -125,19 +275,27 @@ class ApiCallsHelper(
             )
         }
 
-        val request: StringRequest = if (data != null) {
+        val request: StringRequest =
             object : StringRequest(method, url, successListener, failedListener) {
                 override fun getBody(): ByteArray {
-                    return data.toByteArray()
+                    return data?.toByteArray() ?: super.getBody()
                 }
 
                 override fun getBodyContentType(): String {
-                    return "application/json"
+                    return if (data == null) super.getBodyContentType()
+                    else "application/json"
+                }
+
+                override fun getHeaders(): MutableMap<String, String> {
+                    val headers = mutableMapOf<String, String>()
+                    headers.putAll(extraHeaders)
+                    if (defaultAuthentication) {
+                        headers.putAll(getDefaultAuthenticationHeaders())
+                    }
+
+                    return headers
                 }
             }
-        } else {
-            StringRequest(method, url, successListener, failedListener)
-        }
 
         request.tag = tag
         queue.add(request)
@@ -172,6 +330,6 @@ class ApiCallsHelper(
     companion object {
         private const val LOG_TAG = "ApiCallsHelper"
         private const val UNKNOWN_ERROR = "Unknown Error"
-        private const val DEFAULT_URL = "https://api.itachi1706.com"
+        private const val DEFAULT_URL = "https://api.itachi1706.com/v1"
     }
 }
