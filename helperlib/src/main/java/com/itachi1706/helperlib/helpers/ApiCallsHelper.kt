@@ -39,6 +39,7 @@ class ApiCallsHelper(
      * @param context Context
      * @see ApiCallsHelper
      * @see ApiException
+     * @throws ApiException If [callback] is not set. Ensure that [setCallback] is called before calling this method
      */
     class Builder(private val context: Context) {
 
@@ -140,7 +141,7 @@ class ApiCallsHelper(
          *
          * Results will be returned via [callback]
          *
-         * @throws ApiException If [callback] is not set
+         * @throws ApiException If [callback] is not set. Ensure that [setCallback] is called before calling this method
          */
         fun makeRequest() {
             // Validate that listener is set
@@ -157,17 +158,17 @@ class ApiCallsHelper(
      * Gets the default authentication headers
      * @return Default authentication headers
      */
-    private fun getDefaultAuthenticationHeaders(): MutableMap<String, String> {
+    private fun getDefaultAuthenticationHeaders(): Map<String, String> {
         val packageName = this.context.packageName
         val signature = ValidationHelper.getSignatureForValidation(this.context)
 
         if (defaultAuthentication) {
-            return mutableMapOf(
+            return mapOf(
                 "X-Package-Name" to packageName,
                 "X-Signature" to signature
             )
         }
-        return mutableMapOf()
+        return mapOf()
     }
 
 
@@ -286,10 +287,10 @@ class ApiCallsHelper(
                 }
 
                 override fun getHeaders(): MutableMap<String, String> {
-                    val headers = extraHeaders
+                    val headers = mutableMapOf<String, String>()
+                    headers.putAll(extraHeaders)
                     if (defaultAuthentication) {
-                        val authHeaders = getDefaultAuthenticationHeaders()
-                        headers.putAll(authHeaders)
+                        headers.putAll(getDefaultAuthenticationHeaders())
                     }
 
                     return headers
