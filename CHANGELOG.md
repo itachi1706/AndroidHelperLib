@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2025-03-20
+### :sparkles: New Features
+- [`de5c816`](https://github.com/itachi1706/AndroidHelperLib/commit/de5c816722827b99eb440869afdedc43eec539d0) - Added a builder and authentication mechanism *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :recycle: Refactors
+- [`6f90fc6`](https://github.com/itachi1706/AndroidHelperLib/commit/6f90fc658094a24df5a17329871d8649cda2270d) - Resolved some review comments *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [1.4.4] - 2024-07-10
 ### :sparkles: New Features
 - [`1a795ef`](https://github.com/itachi1706/AndroidHelperLib/commit/1a795ef06f2c40e3913de506d8905573e96ee150) - Upgrade to SDK 34 *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -51,3 +59,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.4.2]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.1...1.4.2
 [1.4.3]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.2...1.4.3
 [1.4.4]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.3...1.4.4
+[1.5.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.4...1.5.0
