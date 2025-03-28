@@ -9,7 +9,7 @@ ext.set("versionCode", 334)
 
 android {
     namespace = "com.itachi1706.helperlib"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 19
@@ -55,6 +55,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     testImplementation(libs.junit)
+    testImplementation(kotlin("test"))
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(libs.androidx.appcompat)

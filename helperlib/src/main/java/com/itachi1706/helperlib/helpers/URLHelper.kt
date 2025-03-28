@@ -79,7 +79,9 @@ class URLHelper(url: URL) {
      */
     @WorkerThread
     @Throws(IOException::class)
-    fun executeString(): String? { return if (mode == HTTPS_CONN) processHttpsConnection() else processHttpConnection() }
+    fun executeString(): String {
+        return if (mode == HTTPS_CONN) processHttpsConnection() else processHttpConnection()
+    }
 
     @WorkerThread
     @Throws(IOException::class)
@@ -100,14 +102,14 @@ class URLHelper(url: URL) {
 
     @WorkerThread
     @Throws(IOException::class)
-    private fun processHttpsConnection(): String? {
+    private fun processHttpsConnection(): String {
         try {
             val conn = url!!.openConnection() as HttpsURLConnection
             conn.connectTimeout = if (timeout == -1) HTTP_QUERY_TIMEOUT else timeout
             conn.readTimeout = if (timeout == -1) HTTP_QUERY_TIMEOUT else timeout
             conn.connect()
             // We will do a check for HTTPS error if there is a fallback support enabled
-            if (fallbackHttp) if (conn.responseCode >= 300) return doFallback() // Fallback to HTTP
+            if (fallbackHttp && conn.responseCode >= 300) return doFallback() // Fallback to HTTP
             val `in` = conn.inputStream
             val reader = BufferedReader(InputStreamReader(`in`))
             val str = StringBuilder()
@@ -125,7 +127,7 @@ class URLHelper(url: URL) {
     }
 
     @Throws(IOException::class)
-    private fun doFallback(): String? {
+    private fun doFallback(): String {
         Log.i("HttpsUrlConn", "Error detected in HTTPS Connection. Doing fallback to HTTP")
         url = URL("http", url!!.host, url!!.port, url!!.file)
         return processHttpConnection()

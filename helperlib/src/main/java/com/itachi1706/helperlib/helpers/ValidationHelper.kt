@@ -12,7 +12,6 @@ import java.security.NoSuchAlgorithmException
 import java.security.cert.CertificateException
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
-import kotlin.collections.ArrayList
 
 /**
  * Created by Kenneth on 30/12/2019.
@@ -26,7 +25,8 @@ object ValidationHelper {
     const val AMAZON = 2 // com.amazon.venezia
     const val HUAWEI = 3 // com.huawei.appmarket
 
-    private val playstoreList: List<String> = ArrayList(listOf("com.android.vending", "com.google.android.feedback"))
+    private val playstoreList: List<String> =
+        ArrayList(listOf("com.android.vending", "com.google.android.feedback"))
     private val amazonList: List<String> = ArrayList(listOf("com.amazon.venezia"))
     private val huaweiList: List<String> = ArrayList(listOf("com.huawei.appmarket"))
 
@@ -92,7 +92,10 @@ object ValidationHelper {
             "error"
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
-            Log.e("ValidationHelper", "Algorithm not recognized on this Android Version, signature cannot be validated")
+            Log.e(
+                "ValidationHelper",
+                "Algorithm not recognized on this Android Version, signature cannot be validated"
+            )
             "error"
         }
     }
@@ -101,9 +104,12 @@ object ValidationHelper {
     @Suppress("DEPRECATION")
     @Throws(RuntimeException::class)
     private fun getSignatures(pm: PackageManager, context: Context): Array<Signature> {
-        val pInfo: PackageInfo = pm.getPackageInfo(context.packageName, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) PackageManager.GET_SIGNING_CERTIFICATES
-        else PackageManager.GET_SIGNATURES)
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) pInfo.signingInfo.apkContentsSigners else pInfo.signatures
+        val pInfo: PackageInfo = pm.getPackageInfo(
+            context.packageName,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) PackageManager.GET_SIGNING_CERTIFICATES
+            else PackageManager.GET_SIGNATURES
+        )
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) pInfo.signingInfo!!.apkContentsSigners else pInfo.signatures!!
     }
 
     @JvmStatic
@@ -130,6 +136,7 @@ object ValidationHelper {
     }
 
     private val hexArray = "0123456789ABCDEF".toCharArray()
+
     @JvmStatic
     fun bytesToHex(bytes: ByteArray): String {
         val hexChars = CharArray(bytes.size * 2)
