@@ -2,6 +2,7 @@ package com.itachi1706.helperlib.concurrent
 
 import com.itachi1706.helperlib.concurrent.Constants.Status
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -21,12 +22,14 @@ class CoroutineAsyncTaskTest {
     private lateinit var task: TestCoroutineAsyncTask
     private val testDispatcher = Dispatchers.Unconfined
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @BeforeTest
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         task = spy(TestCoroutineAsyncTask())
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @AfterTest
     fun tearDown() {
         Dispatchers.resetMain()
