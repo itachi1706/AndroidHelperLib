@@ -17,7 +17,7 @@ object LogHelper {
         externalLog = externalLogger
     }
 
-    private fun externalLogging(logLevel: Int, tag:String, message: String) {
+    private fun externalLogging(logLevel: Int, tag: String, message: String) {
         externalLog?.handleExtraLogging(logLevel, tag, message)
     }
 
@@ -34,7 +34,7 @@ object LogHelper {
     @JvmStatic
     fun d(tag: String, message: String, tr: Throwable) {
         externalLogging(Log.DEBUG, tag, message)
-externalLogging(Log.DEBUG, tag, EXCEPTION_THROWN_MSG + tr.message)
+        externalLogging(Log.DEBUG, tag, EXCEPTION_THROWN_MSG + tr.message)
         Log.d(tag, message, tr)
     }
 
@@ -56,20 +56,20 @@ externalLogging(Log.DEBUG, tag, EXCEPTION_THROWN_MSG + tr.message)
     @JvmStatic
     fun e(tag: String, message: String, tr: Throwable) {
         externalLogging(Log.ERROR, tag, message)
-externalLogging(Log.ERROR, tag,  EXCEPTION_THROWN_MSG + tr.message)
+        externalLogging(Log.ERROR, tag, EXCEPTION_THROWN_MSG + tr.message)
         Log.e(tag, message, tr)
     }
 
     @JvmStatic
     fun w(tag: String, tr: Throwable) {
-externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
+        externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
         Log.w(tag, tr)
     }
 
     @JvmStatic
     fun w(tag: String, message: String, tr: Throwable) {
         externalLogging(Log.WARN, tag, message)
-externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
+        externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
         Log.w(tag, message, tr)
     }
 
@@ -95,7 +95,7 @@ externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
     }
 
     @JvmStatic
-    fun getGenericLogString(logLevel: Int, tag:String, message: String): String {
+    fun getGenericLogString(logLevel: Int, tag: String, message: String): String {
         return "${getLogLevelChar(logLevel)}/$tag: $message"
     }
 
