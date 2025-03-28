@@ -4,7 +4,16 @@ package com.itachi1706.helperlib.concurrent
 
 import com.itachi1706.helperlib.concurrent.Constants.Status
 import com.itachi1706.helperlib.helpers.LogHelper
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 
 /**
@@ -23,7 +32,7 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
     var status: Status = Status.PENDING
     var preJob: Job? = null
     var bgJob: Deferred<Result>? = null
-    abstract fun doInBackground(vararg params: Params?) : Result
+    abstract fun doInBackground(vararg params: Params?): Result
     open fun onProgressUpdate(vararg params: Progress?) {}
     open fun onPostExecute(result: Result?) {}
     open fun onPreExecute() {}
@@ -54,9 +63,7 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
             when (status) {
                 Status.RUNNING -> throw IllegalStateException("Cannot execute task: the task is already running")
                 Status.FINISHED -> throw IllegalStateException("Cannot execute task: the task has already been executed (task can only be executed once)")
-                else -> {
-
-                }
+                else -> {}
             }
         }
 
