@@ -34,7 +34,7 @@ object LogHelper {
     @JvmStatic
     fun d(tag: String, message: String, tr: Throwable) {
         externalLogging(Log.DEBUG, tag, message)
-        externalLogging(Log.DEBUG, tag, EXCEPTION_THROWN_MSG + tr.message)
+externalLogging(Log.DEBUG, tag, EXCEPTION_THROWN_MSG + tr.message)
         Log.d(tag, message, tr)
     }
 
@@ -56,20 +56,20 @@ object LogHelper {
     @JvmStatic
     fun e(tag: String, message: String, tr: Throwable) {
         externalLogging(Log.ERROR, tag, message)
-        externalLogging(Log.ERROR, tag,  EXCEPTION_THROWN_MSG + tr.message)
+externalLogging(Log.ERROR, tag,  EXCEPTION_THROWN_MSG + tr.message)
         Log.e(tag, message, tr)
     }
 
     @JvmStatic
     fun w(tag: String, tr: Throwable) {
-        externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
+externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
         Log.w(tag, tr)
     }
 
     @JvmStatic
     fun w(tag: String, message: String, tr: Throwable) {
         externalLogging(Log.WARN, tag, message)
-        externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
+externalLogging(Log.WARN, tag, EXCEPTION_THROWN_MSG + tr.message)
         Log.w(tag, message, tr)
     }
 
