@@ -19,6 +19,8 @@
          <trust group="org.mockito"/>
          <trust group="org.mockito.kotlin"/>
          <trust group="org.objenesis"/>
+         <trust group="org.apache" name="apache"/>
+         <trust group="org.codehaus.groovy" />
       </trusted-artifacts>
       <trusted-keys>
          <trusted-key id="04543577D6A9CC626239C50C7ECBD740FF06AEB5">
