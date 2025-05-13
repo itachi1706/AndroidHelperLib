@@ -1,7 +1,7 @@
 [versions]
 androidLibrary = "8.9.1"
 appcompat = "1.7.0"
-coreKtx = "1.15.0"
+coreKtx = "1.16.0"
 espressoCore = "3.6.1"
 junit = "1.2.1"
 junitVersion = "4.13.2"
