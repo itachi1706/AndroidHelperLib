@@ -5,7 +5,7 @@
       <verify-metadata>true</verify-metadata>
       <verify-signatures>true</verify-signatures>
       <keyring-format>armored</keyring-format>
-      <key-servers>
+      <key-servers enabled="false">
          <key-server uri="https://keyserver.ubuntu.com"/>
          <key-server uri="https://keys.openpgp.org"/>
          <key-server uri="https://keys.gnupg.net"/>
@@ -14,13 +14,6 @@
          <trust group="gradle" name="gradle"/>
          <trust file=".*-javadoc[.]jar" regex="true"/>
          <trust file=".*-sources[.]jar" regex="true"/>
-         <!-- Trust these artifacts for now -->
-         <trust group="net.bytebuddy"/>
-         <trust group="org.mockito"/>
-         <trust group="org.mockito.kotlin"/>
-         <trust group="org.objenesis"/>
-         <trust group="org.apache" name="apache"/>
-         <trust group="org.codehaus.groovy" />
       </trusted-artifacts>
       <trusted-keys>
          <trusted-key id="04543577D6A9CC626239C50C7ECBD740FF06AEB5">
@@ -37,6 +30,7 @@
          </trusted-key>
          <trusted-key id="0F07D1201BDDAB67CFB84EB479752DB6C966F0B8" group="com.google.android" name="annotations"/>
          <trusted-key id="10F3C7A02ECA55E502BADCF3991EFB94DB91127D" group="org.ow2" name="ow2"/>
+         <trusted-key id="147B691A19097624902F4EA9689CBE64F4BC997F" group="^org[.]mockito($|([.].*))" regex="true"/>
          <trusted-key id="190D5A957FF22273E601F7A7C92C5FEC70161C62" group="org.apache" name="apache"/>
          <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework" name="checker-qual"/>
          <trusted-key id="1A55F091AD28C07F831FA44D7905DE25C78AD456" group="com.google.protobuf"/>
@@ -50,6 +44,7 @@
          <trusted-key id="3051D45031E13516A6E8FAFF280D66A55F5316C5" group="org.bitbucket.b_c" name="jose4j"/>
          <trusted-key id="31BAE2E51D95E0F8AD9B7BCC40A3C4432BD7308C" group="com.googlecode.juniversalchardet" name="juniversalchardet"/>
          <trusted-key id="33FD4BFD33554634053D73C0C2148900BCD3C2AF" group="org.jetbrains" name="annotations"/>
+         <trusted-key id="34441E504A937F43EB0DAEF96A65176A0FB1CD0B" group="org.codehaus.groovy" name="groovy" version="3.0.22"/>
          <trusted-key id="44FBDBBC1A00FE414F1C1873586654072EAD6677" group="org.sonatype.oss" name="oss-parent"/>
          <trusted-key id="47504B76CF89C15C0512D9AFE16AB52D79FD224F" group="com.google.api.grpc" name="proto-google-common-protos"/>
          <trusted-key id="475F3B8E59E6E63AA78067482C7B12F2A511E325" group="org.slf4j"/>
@@ -98,6 +93,7 @@
             <trusting group="^androidx[.]test($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="A6D6C97108B8585F91B158748671A8DF71296252" group="com.squareup" name="javapoet"/>
+         <trusted-key id="A7892505CF1A58076453E52D7999BEFBA1039E8B" group="net.bytebuddy"/>
          <trusted-key id="AA70C7C433D501636392EC02153E7A3C2B4E5118" group="org.eclipse.ee4j" name="project"/>
          <trusted-key id="B02335AA54CCF21E52BBF9ABD9C565AA72BA2FDD" group="io.grpc"/>
          <trusted-key id="B12EC4594C2C8F6DF86AE4512606D7987FF1CD22" group="com.android.volley" name="volley"/>
@@ -113,6 +109,7 @@
          <trusted-key id="E5138A8E9F2E7E42D38B14D99AEE152CDCCEBFCB" group="io.github.hakky54"/>
          <trusted-key id="E77417AC194160A3FABD04969A259C7EE636C5ED" group="com.google.errorprone"/>
          <trusted-key id="E7DC75FC24FB3C8DFE8086AD3D5839A2262CBBFB" group="org.jetbrains.kotlinx"/>
+         <trusted-key id="E85AED155021AF8A6C6B7A4A7C7D8456294423BA" group="org.objenesis"/>
          <trusted-key id="EB1B3DE71713C9EC2E87CC26EE92349AD86DE446" group="com.google.j2objc" name="j2objc-annotations"/>
          <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="com.google.errorprone"/>
          <trusted-key id="FA77DCFEF2EE6EB2DEBEDD2C012579464D01C06A" group="org.apache" name="apache"/>
@@ -785,6 +782,11 @@
       <component group="org.apache" name="apache" version="13">
          <artifact name="apache-13.pom">
             <pgp value="F254B35617DC255D9344BCFA873A8E86B4372146"/>
+         </artifact>
+      </component>
+      <component group="org.apache" name="apache" version="15">
+         <artifact name="apache-15.pom">
+            <pgp value="6BDACA2C0493CCA133B372D09C4F7E9D98B1CC53"/>
          </artifact>
       </component>
       <component group="org.apache" name="apache" version="18">
