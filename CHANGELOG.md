@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1] - 2025-05-19
+### :sparkles: New Features
+- [`46a38da`](https://github.com/itachi1706/AndroidHelperLib/commit/46a38dabc406fe391e506781123c28f7fa43849e) - Upgrade to AGP 8.9.1 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`bf0985a`](https://github.com/itachi1706/AndroidHelperLib/commit/bf0985ae90e8c8d0d4ce9e1d8ca0e192d61f5e68) - Targeting Android API 35 *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :recycle: Refactors
+- [`34edc51`](https://github.com/itachi1706/AndroidHelperLib/commit/34edc5168f2f875067a5736c9fec91333786a597) - Updated some code *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`5e83ae3`](https://github.com/itachi1706/AndroidHelperLib/commit/5e83ae331210077c89f77adf06d0432e972b8ad7) - Formatting *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`d9dea3c`](https://github.com/itachi1706/AndroidHelperLib/commit/d9dea3c170f54af01cd70180d67e906b2f5e026d) - Lint fixes *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :white_check_mark: Tests
+- [`531b405`](https://github.com/itachi1706/AndroidHelperLib/commit/531b4054deeba2cbf708aadffb08ea3c9ee6bdef) - Added some tests *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`b8e0eac`](https://github.com/itachi1706/AndroidHelperLib/commit/b8e0eac3a747a7ee99679e933fa3de8d2a9dcda0) - Fixed non opt in APIs *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`c64f4c3`](https://github.com/itachi1706/AndroidHelperLib/commit/c64f4c3e9c57d64e75f98b118231ea72aa5deb96) - Ignore test for now *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`2cd154a`](https://github.com/itachi1706/AndroidHelperLib/commit/2cd154ac47acf4fe19ef5f986d6f4c7155eab335) - Ignore whole test *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`4178989`](https://github.com/itachi1706/AndroidHelperLib/commit/417898922542235458bf2bd5056656d958394837) - Apply suggestions from code review *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [1.5.0] - 2025-03-20
 ### :sparkles: New Features
 - [`de5c816`](https://github.com/itachi1706/AndroidHelperLib/commit/de5c816722827b99eb440869afdedc43eec539d0) - Added a builder and authentication mechanism *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -60,3 +80,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.4.3]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.2...1.4.3
 [1.4.4]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.3...1.4.4
 [1.5.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.4...1.5.0
+[1.5.1]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.0...1.5.1
