@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.2] - 2025-06-13
+### :wrench: Chores
+- [`bf60457`](https://github.com/itachi1706/AndroidHelperLib/commit/bf6045765aeda6bbcf4f950741bd9a2d456a744d) - **deps**: bump stefanzweifel/git-auto-commit-action from 5 to 6 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [1.5.1] - 2025-05-19
 ### :sparkles: New Features
 - [`46a38da`](https://github.com/itachi1706/AndroidHelperLib/commit/46a38dabc406fe391e506781123c28f7fa43849e) - Upgrade to AGP 8.9.1 *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -81,3 +86,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.4.4]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.3...1.4.4
 [1.5.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.4...1.5.0
 [1.5.1]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.0...1.5.1
+[1.5.2]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.1...1.5.2
