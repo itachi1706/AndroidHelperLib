@@ -9,7 +9,7 @@ ext.set("versionCode", 385)
 
 android {
     namespace = "com.itachi1706.helperlib"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 19
