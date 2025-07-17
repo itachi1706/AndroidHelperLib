@@ -5,7 +5,7 @@ plugins {
 }
 
 ext.set("version", "1.6.0")
-ext.set("versionCode", 389)
+ext.set("versionCode", 391)
 
 android {
     namespace = "com.itachi1706.helperlib"
