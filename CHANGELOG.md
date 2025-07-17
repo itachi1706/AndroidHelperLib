@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2025-07-17
+### :sparkles: New Features
+- [`4b5c285`](https://github.com/itachi1706/AndroidHelperLib/commit/4b5c285fd73a9bf59a3ff200a9589698f3f38d95) - Added support for EdgetoEdge for Android R (30) and above *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :bug: Bug Fixes
+- [`41b089e`](https://github.com/itachi1706/AndroidHelperLib/commit/41b089e5fb88a4745ac30d533cadb31be6b3e40d) - Properly do edge to edge *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`7801b8f`](https://github.com/itachi1706/AndroidHelperLib/commit/7801b8fef5f6aaea6fc5aa4cc74ccd1bc32c6d46) - Compile against SDK 36 *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [1.5.2] - 2025-06-13
 ### :wrench: Chores
 - [`bf60457`](https://github.com/itachi1706/AndroidHelperLib/commit/bf6045765aeda6bbcf4f950741bd9a2d456a744d) - **deps**: bump stefanzweifel/git-auto-commit-action from 5 to 6 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
@@ -87,3 +98,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.5.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.4.4...1.5.0
 [1.5.1]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.0...1.5.1
 [1.5.2]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.1...1.5.2
+[1.6.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.2...1.6.0
