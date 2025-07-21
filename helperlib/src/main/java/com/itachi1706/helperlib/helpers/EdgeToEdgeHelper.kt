@@ -1,14 +1,11 @@
 package com.itachi1706.helperlib.helpers
 
-import android.os.Build
 import android.view.Window
-import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 
 @Suppress("unused")
-@RequiresApi(Build.VERSION_CODES.R)
 object EdgeToEdgeHelper {
 
     /**
