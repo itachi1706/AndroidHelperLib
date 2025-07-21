@@ -1,6 +1,8 @@
 package com.itachi1706.helperlib.helpers
 
 import android.view.Window
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -40,5 +42,31 @@ object EdgeToEdgeHelper {
 
             WindowInsetsCompat.CONSUMED // Indicate that we have consumed the insets
         }
+    }
+
+    /**
+     * Set the activity to be edge to edge with system bars and set the content view
+     * @param view The view to set the insets on
+     * @param activity The activity to set the content view on
+     * @param layoutId The layout resource ID to set as content view
+     */
+    @JvmStatic
+    fun setEdgeToEdgeWithContentView(view: android.view.View, activity: AppCompatActivity, @LayoutRes layoutId: Int) {
+        disableWindowSystemWindows(activity.window)
+        activity.setContentView(layoutId)
+        setViewEdgeToEdge(view)
+    }
+
+    /**
+     * Set the activity to be edge to edge with system bars and set the content view
+     * @param view The view to set the insets on
+     * @param activity The activity to set the content view on
+     * @param layoutView The view to set as content view
+     */
+    @JvmStatic
+    fun setEdgeToEdgeWithContentView(view: android.view.View, activity: AppCompatActivity, layoutView: android.view.View) {
+        disableWindowSystemWindows(activity.window)
+        activity.setContentView(layoutView)
+        setViewEdgeToEdge(view)
     }
 }
