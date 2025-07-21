@@ -37,10 +37,11 @@ object EdgeToEdgeHelper {
     @JvmStatic
     fun setViewEdgeToEdge(view: android.view.View, @WindowInsetsCompat.Type.InsetsType insetType: Int) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+            // Get the insets for the system bars (status bar, navigation bar) and apply padding
             val insets = windowInsets.getInsets(insetType)
             v.setPadding(insets.left, insets.top, insets.right, insets.bottom)
 
-            WindowInsetsCompat.CONSUMED
+            WindowInsetsCompat.CONSUMED // Indicate that we have consumed the insets
         }
     }
 }
