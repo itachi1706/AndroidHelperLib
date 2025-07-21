@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.2] - 2025-07-21
+### :bug: Bug Fixes
+- [`7f2abe7`](https://github.com/itachi1706/AndroidHelperLib/commit/7f2abe7cefbbe131515466995d5f85b245c48952) - Remove Android R requirement *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [1.6.1] - 2025-07-21
 ### :wrench: Chores
 - [`da4fb3f`](https://github.com/itachi1706/AndroidHelperLib/commit/da4fb3fe553ea3b81864127624fd71611c6f3aee) - Added checks to ensure that Inset Type is only specific values *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -105,3 +110,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.5.2]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.1...1.5.2
 [1.6.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.2...1.6.0
 [1.6.1]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.0...1.6.1
+[1.6.2]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.1...1.6.2
