@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.3] - 2025-07-21
+### :sparkles: New Features
+- [`10cfedf`](https://github.com/itachi1706/AndroidHelperLib/commit/10cfedf9b1d642be1da07ab1f75f30d7851c3f19) - Added support for content view edge to edge as well *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [1.6.2] - 2025-07-21
 ### :bug: Bug Fixes
 - [`7f2abe7`](https://github.com/itachi1706/AndroidHelperLib/commit/7f2abe7cefbbe131515466995d5f85b245c48952) - Remove Android R requirement *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -111,3 +116,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.6.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.5.2...1.6.0
 [1.6.1]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.0...1.6.1
 [1.6.2]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.1...1.6.2
+[1.6.3]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.2...1.6.3
