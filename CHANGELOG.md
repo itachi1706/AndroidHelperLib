@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2025-08-25
+### :sparkles: New Features
+- [`a63c3b6`](https://github.com/itachi1706/AndroidHelperLib/commit/a63c3b6e52b4a9c8cb5547b57f199ba0ee86b64f) - Temporarily readded files until extensions are fixed *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`bbf83df`](https://github.com/itachi1706/AndroidHelperLib/commit/bbf83df76cb6790b46377a21090fb6f6476aa031) - **deps**: bump actions/setup-java from 4 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`2551b49`](https://github.com/itachi1706/AndroidHelperLib/commit/2551b499ffedd1ab26d031673ef2a1129b4b7292) - **deps**: bump actions/checkout from 4 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`1dd3ccd`](https://github.com/itachi1706/AndroidHelperLib/commit/1dd3ccd78309c99aeb1b8f2402d21f14442407ab) - **deps**: Bump library version *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.0.0] - 2025-08-25
 ### :boom: BREAKING CHANGES
 - due to [`6a3640b`](https://github.com/itachi1706/AndroidHelperLib/commit/6a3640bb928e9073b1f4ec5d4acbc532b0be32d9) - Switched to using Kotlin extensions for EdgeToEdge and pref helpers *(commit by [@itachi1706](https://github.com/itachi1706))*:
@@ -140,3 +150,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.6.3]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.2...1.6.3
 [1.6.4]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.3...1.6.4
 [2.0.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.4...2.0.0
+[2.0.1]: https://github.com/itachi1706/AndroidHelperLib/compare/2.0.0...2.0.1
