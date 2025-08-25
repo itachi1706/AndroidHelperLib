@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-08-25
+### :boom: BREAKING CHANGES
+- due to [`6a3640b`](https://github.com/itachi1706/AndroidHelperLib/commit/6a3640bb928e9073b1f4ec5d4acbc532b0be32d9) - Switched to using Kotlin extensions for EdgeToEdge and pref helpers *(commit by [@itachi1706](https://github.com/itachi1706))*:
+
+  Switched to using Kotlin extensions for EdgeToEdge and pref helpers
+
+- due to [`4211733`](https://github.com/itachi1706/AndroidHelperLib/commit/4211733079850aacddd4b46e4e3f398c7fc6e259) - Migrated PendingIntentDep to Context extensions *(commit by [@itachi1706](https://github.com/itachi1706))*:
+
+  Migrated PendingIntentDep to Context extensions
+
+
+### :sparkles: New Features
+- [`6a3640b`](https://github.com/itachi1706/AndroidHelperLib/commit/6a3640bb928e9073b1f4ec5d4acbc532b0be32d9) - Switched to using Kotlin extensions for EdgeToEdge and pref helpers *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`4211733`](https://github.com/itachi1706/AndroidHelperLib/commit/4211733079850aacddd4b46e4e3f398c7fc6e259) - Migrated PendingIntentDep to Context extensions *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [1.6.4] - 2025-07-22
 ### :sparkles: New Features
 - [`ab5d449`](https://github.com/itachi1706/AndroidHelperLib/commit/ab5d4499392ccd28fb17236249651b4ce1889de1) - Added more permutations to E2E *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -123,3 +139,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.6.2]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.1...1.6.2
 [1.6.3]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.2...1.6.3
 [1.6.4]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.3...1.6.4
+[2.0.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.4...2.0.0
