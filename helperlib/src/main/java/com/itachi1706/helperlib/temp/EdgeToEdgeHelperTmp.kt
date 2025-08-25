@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 
-@Deprecated("Use the non temp version. This is fallback for now")
+// Eventually will deprecate the object and use extension functions instead
 @Suppress("unused")
 object EdgeToEdgeHelperTmp {
 

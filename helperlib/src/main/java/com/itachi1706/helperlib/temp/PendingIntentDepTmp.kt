@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 
-@Deprecated("Use the non temp version. This is fallback for now")
+// Eventually will deprecate the object and use extension functions instead
 @Suppress("UnspecifiedImmutableFlag", "Unused")
 object PendingIntentDepTmp {
 

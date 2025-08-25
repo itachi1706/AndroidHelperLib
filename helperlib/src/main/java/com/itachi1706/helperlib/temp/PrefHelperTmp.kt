@@ -13,7 +13,7 @@ import androidx.preference.PreferenceManager
  * Created by Kenneth on 30/12/2019.
  * for com.itachi1706.helperlib.helpers in Helper Library
  */
-@Deprecated("Use the non temp version. This is fallback for now")
+// Eventually will deprecate the object and use extension functions instead
 @Suppress("unused")
 object PrefHelperTmp {
     /**
