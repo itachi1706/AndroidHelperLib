@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2] - 2025-08-25
+### :wrench: Chores
+- [`e82fcc9`](https://github.com/itachi1706/AndroidHelperLib/commit/e82fcc9b92ce0b24b3796910b2b607e265aeb0bd) - Disable deprecation warning for now *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.0.1] - 2025-08-25
 ### :sparkles: New Features
 - [`a63c3b6`](https://github.com/itachi1706/AndroidHelperLib/commit/a63c3b6e52b4a9c8cb5547b57f199ba0ee86b64f) - Temporarily readded files until extensions are fixed *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -151,3 +156,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.6.4]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.3...1.6.4
 [2.0.0]: https://github.com/itachi1706/AndroidHelperLib/compare/1.6.4...2.0.0
 [2.0.1]: https://github.com/itachi1706/AndroidHelperLib/compare/2.0.0...2.0.1
+[2.0.2]: https://github.com/itachi1706/AndroidHelperLib/compare/2.0.1...2.0.2
