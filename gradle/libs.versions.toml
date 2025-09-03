@@ -1,5 +1,5 @@
 [versions]
-androidLibrary = "8.12.1"
+androidLibrary = "8.13.0"
 appcompat = "1.7.1"
 coreKtx = "1.17.0"
 espressoCore = "3.7.0"
