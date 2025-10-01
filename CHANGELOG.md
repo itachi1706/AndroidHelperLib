@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2025-10-01
+### :sparkles: New Features
+- [`ff63b46`](https://github.com/itachi1706/AndroidHelperLib/commit/ff63b46f88215ccd959e14683f9bedc813686956) - Updated ApiResponse class to support Serialized Api Responses *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.1.0] - 2025-09-30
 ### :recycle: Refactors
 - [`bb66921`](https://github.com/itachi1706/AndroidHelperLib/commit/bb66921ae7c421f4782296c56d5491605f73f0de) - Moved extensions to its own files *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -163,3 +168,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.1]: https://github.com/itachi1706/AndroidHelperLib/compare/2.0.0...2.0.1
 [2.0.2]: https://github.com/itachi1706/AndroidHelperLib/compare/2.0.1...2.0.2
 [2.1.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.0.2...2.1.0
+[2.2.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.1.0...2.2.0
