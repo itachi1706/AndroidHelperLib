@@ -1,7 +1,13 @@
 package com.itachi1706.helperlib.objects
 
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.decodeFromJsonElement
 import java.io.Serializable
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 /**
  * API Response Object
@@ -16,11 +22,35 @@ import java.util.Date
  * @see Serializable
  * @see Date
  */
+@Suppress("unused")
+@kotlinx.serialization.Serializable
 data class ApiResponse(
-    val date: Date,
+    val date: String,
     val status: Int,
     val message: String,
     val success: Boolean,
-    val data: Any? = null,
+    val data: JsonElement? = null,
     val error: String? = null
-) : Serializable
+) : Serializable {
+    inline fun <reified T> getTypedData(json: Json = Json): T? {
+        return data?.let {
+            json.decodeFromJsonElement<T>(it)
+        }
+    }
+
+    fun getDateObject(): Date? {
+        // Remove nanoseconds if present (keep up to milliseconds)
+        val regex = Regex("""\.\d{3,9}""")
+        val dateStr = regex.replace(date) { matchResult ->
+            // Keep only first 3 digits (milliseconds)
+            ".${matchResult.value.substring(1, 4)}"
+        }
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+        format.timeZone = TimeZone.getTimeZone("UTC")
+        return try {
+            format.parse(dateStr)
+        } catch (e: Exception) {
+            null
+        }
+    }
+}
