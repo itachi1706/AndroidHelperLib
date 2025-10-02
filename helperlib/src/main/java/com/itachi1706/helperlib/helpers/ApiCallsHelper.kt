@@ -124,7 +124,7 @@ class ApiCallsHelper(
         /**
          * Set the method to use for API calls
          * @param method Method to use for API calls. See [HttpRequest.Method] for available methods
-         * @see [HttpRequest.Method] for available methods
+         * @see HttpRequest.Method
          */
         fun setMethod(method: HttpRequest.Method): Builder {
             this.method = HttpRequest.mapToVolleyMethods(method)
