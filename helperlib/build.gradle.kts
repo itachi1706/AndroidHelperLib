@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-ext.set("version", "2.2.0")
-ext.set("versionCode", 442)
+ext.set("version", "2.3.0")
+ext.set("versionCode", 460)
 
 android {
     namespace = "com.itachi1706.helperlib"
