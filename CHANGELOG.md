@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.1] - 2025-10-02
+### :bug: Bug Fixes
+- [`a2d9dc7`](https://github.com/itachi1706/AndroidHelperLib/commit/a2d9dc7c426941ec21eb4531f76b8f1b2641d7c9) - Set call handling to not use base url as path *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.3.0] - 2025-10-02
 ### :sparkles: New Features
 - [`b55323c`](https://github.com/itachi1706/AndroidHelperLib/commit/b55323c76c33a5fd1ebfcdce09cb7c12dc5eae8e) - Added a mapping to map to Volley methods *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -178,3 +183,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.0.2...2.1.0
 [2.2.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.1.0...2.2.0
 [2.3.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.2.0...2.3.0
+[2.3.1]: https://github.com/itachi1706/AndroidHelperLib/compare/2.3.0...2.3.1
