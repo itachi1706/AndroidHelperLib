@@ -8,6 +8,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.itachi1706.helperlib.exceptions.ApiException
 import com.itachi1706.helperlib.objects.ApiResponse
+import com.itachi1706.helperlib.objects.HttpRequest
 import kotlinx.serialization.json.Json
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
@@ -111,11 +112,22 @@ class ApiCallsHelper(
         }
 
         /**
-         * Set the method to use for API calls
-         * @param method Method to use for API calls
+         * Set the method to use for API calls. Requires Android Volley dependency
+         * @param method Method to use for API calls. See [Request.Method] for available methods
+         * @see Request.Method
          */
         fun setMethod(method: Int): Builder {
             this.method = method
+            return this
+        }
+
+        /**
+         * Set the method to use for API calls
+         * @param method Method to use for API calls. See [HttpRequest.Method] for available methods
+         * @see HttpRequest.Method
+         */
+        fun setMethod(method: HttpRequest.Method): Builder {
+            this.method = HttpRequest.mapToVolleyMethods(method)
             return this
         }
 
