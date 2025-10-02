@@ -55,6 +55,8 @@ class ApiCallsHelper(
         private var method: Int = Request.Method.GET
         private var data: String? = null
 
+        private var path: String = ""
+
         /**
          * Set the base URL to use for API calls
          * @param baseUrl Base URL to use defaults to [DEFAULT_URL]
@@ -140,6 +142,11 @@ class ApiCallsHelper(
             return this
         }
 
+        fun setPath(path: String): Builder {
+            this.path = path
+            return this
+        }
+
         /**
          * Builds the [ApiCallsHelper]
          * @return [ApiCallsHelper]
@@ -162,7 +169,7 @@ class ApiCallsHelper(
             }
 
             val helper = ApiCallsHelper(context, baseUrl, tag, extraHeaders, defaultAuthentication)
-            helper.internalCallHandling(method, baseUrl, data, callback!!)
+            helper.internalCallHandling(method, path, data, callback!!)
         }
     }
 
