@@ -142,6 +142,10 @@ class ApiCallsHelper(
             return this
         }
 
+        /**
+         * Set the path to use for API calls
+         * @param path Path to use for API calls
+         */
         fun setPath(path: String): Builder {
             this.path = path
             return this
