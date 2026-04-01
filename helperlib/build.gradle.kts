@@ -20,6 +20,9 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            enableUnitTestCoverage = true
+        }
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -74,39 +77,45 @@ dependencies {
     implementation(libs.volley)
 }
 
-afterEvaluate {
-    tasks.register<JacocoReport>("jacocoDebugReport") {
-        dependsOn("testDebugUnitTest")
-        
-        reports {
-            xml.required.set(true)
-            html.required.set(true)
-            csv.required.set(false)
-        }
-        
-        classDirectories.setFrom(
-            fileTree(layout.buildDirectory.dir("intermediates/javac/debug/classes")) {
-                exclude(
-                    "**/R.class",
-                    "**/R$*.class",
-                    "**/*Hilt*.class",
-                    "**/*_Factory.class",
-                    "**/*_MembersInjector.class"
-                )
-            }
-        )
-        
-        sourceDirectories.setFrom(
-            files(
-                "src/main/java",
-                "src/main/kotlin"
-            )
-        )
-        
-        executionData.setFrom(
-            files(layout.buildDirectory.file("jacoco/testDebugUnitTest.exec"))
-        )
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
+    group = "verification"
+    description = "Generate Jacoco coverage reports for the debug build."
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
     }
+
+    val fileFilter = listOf(
+        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
+        "**/*Test*.*", "android/**/*.*"
+    )
+
+    val buildDir = layout.buildDirectory.get().asFile.path
+
+    val debugTree = fileTree("$buildDir/intermediates/javac/debug/classes") {
+        exclude(fileFilter)
+    }
+    val kotlinDebugTree = fileTree("$buildDir/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    val mainSrc = "$projectDir/src/main/java"
+    val kotlinSrc = "$projectDir/src/main/kotlin"
+
+    sourceDirectories.setFrom(files(mainSrc, kotlinSrc))
+    classDirectories.setFrom(files(debugTree, kotlinDebugTree))
+
+    executionData.setFrom(
+        fileTree(buildDir) {
+            include(
+                "jacoco/testDebugUnitTest.exec",
+                "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+            )
+        }
+    )
+
 }
 
 // Apply the publish.gradle file
