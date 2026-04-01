@@ -31,10 +31,22 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
     var preJob: Job? = null
     var bgJob: Deferred<Result>? = null
     abstract fun doInBackground(vararg params: Params?): Result
-    open fun onProgressUpdate(vararg params: Progress?) {}
-    open fun onPostExecute(result: Result?) {}
-    open fun onPreExecute() {}
-    open fun onCancelled(result: Result?) {}
+    open fun onProgressUpdate(vararg params: Progress?) {
+        // abstract fn
+    }
+
+    open fun onPostExecute(result: Result?) {
+        // abstract fn
+    }
+
+    open fun onPreExecute() {
+        // abstract fn
+    }
+
+    open fun onCancelled(result: Result?) {
+        // abstract fn
+    }
+
     var isCancelled = false
 
     /**
@@ -61,7 +73,9 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
             when (status) {
                 Status.RUNNING -> throw IllegalStateException("Cannot execute task: the task is already running")
                 Status.FINISHED -> throw IllegalStateException("Cannot execute task: the task has already been executed (task can only be executed once)")
-                else -> {}
+                else -> {
+                    // No actions required, just continue
+                }
             }
         }
 
