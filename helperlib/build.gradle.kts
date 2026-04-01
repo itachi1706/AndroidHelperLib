@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.jacoco)
 }
 
 ext.set("version", "2.3.1")
@@ -71,6 +72,41 @@ dependencies {
     implementation(libs.material)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.volley)
+}
+
+afterEvaluate {
+    tasks.register<JacocoReport>("jacocoDebugReport") {
+        dependsOn("testDebugUnitTest")
+        
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+            csv.required.set(false)
+        }
+        
+        classDirectories.setFrom(
+            fileTree(layout.buildDirectory.dir("intermediates/javac/debug/classes")) {
+                exclude(
+                    "**/R.class",
+                    "**/R$*.class",
+                    "**/*Hilt*.class",
+                    "**/*_Factory.class",
+                    "**/*_MembersInjector.class"
+                )
+            }
+        )
+        
+        sourceDirectories.setFrom(
+            files(
+                "src/main/java",
+                "src/main/kotlin"
+            )
+        )
+        
+        executionData.setFrom(
+            files(layout.buildDirectory.file("jacoco/testDebugUnitTest.exec"))
+        )
+    }
 }
 
 // Apply the publish.gradle file
