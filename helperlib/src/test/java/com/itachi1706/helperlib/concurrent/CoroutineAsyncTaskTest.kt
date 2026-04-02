@@ -12,7 +12,6 @@ import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.spy
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -128,9 +127,51 @@ class CoroutineAsyncTaskTest {
         assertEquals(50, task.progress)
     }
 
+    @Test
+    fun cancelWithMayInterruptFalseCancelsCompletedTask() = runBlocking {
+        task.execute("param1")
+        task.preJob?.join()
+        task.bgJob?.await()
+
+        task.cancel(false)
+        delay(100)
+
+        assertEquals(true, task.isCancelled)
+        assertEquals(Status.FINISHED, task.status)
+    }
+
+    @Test
+    fun publishProgressAfterCancellationDoesNotInvokeProgressCallback() = runBlocking {
+        task.execute("param1")
+        task.preJob?.join()
+        task.cancel(true)
+
+        task.publishProgress(99)
+        delay(100)
+
+        assertEquals(null, task.progress)
+        assertEquals(0, task.progressUpdateCount)
+    }
+
+    @Test
+    fun cancelAfterBackgroundCompletionInvokesOnCancelledWithResult() = runBlocking {
+        task.execute("param1")
+        task.preJob?.join()
+        task.bgJob?.await()
+
+        task.cancel(true)
+        delay(100)
+
+        assertEquals(1, task.cancelledInvocationCount)
+        assertEquals("Result", task.cancelledResult)
+    }
+
     private class TestCoroutineAsyncTask : CoroutineAsyncTask<String, Int, String>("TestTask") {
         var result: String? = null
         var progress: Int? = null
+        var progressUpdateCount: Int = 0
+        var cancelledResult: String? = null
+        var cancelledInvocationCount: Int = 0
 
         override fun doInBackground(vararg params: String?): String {
             return "Result"
@@ -142,6 +183,13 @@ class CoroutineAsyncTaskTest {
 
         override fun onProgressUpdate(vararg params: Int?) {
             this.progress = params[0]
+            this.progressUpdateCount++
+        }
+
+        override fun onCancelled(result: String?) {
+            this.cancelledResult = result
+            this.cancelledInvocationCount++
         }
     }
+
 }
