@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.2] - 2026-04-02
+### :sparkles: New Features
+- [`df13790`](https://github.com/itachi1706/AndroidHelperLib/commit/df13790d69fa6a8cdfe14d4d68f564f77c6e7f3e) - **deps**: Bump AGP to 9.1.0 *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :recycle: Refactors
+- [`fa0b87d`](https://github.com/itachi1706/AndroidHelperLib/commit/fa0b87d1c092f9156380be014fa7e37a4c10f92d) - Resolve some sonar issues *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :white_check_mark: Tests
+- [`8c53169`](https://github.com/itachi1706/AndroidHelperLib/commit/8c53169323bfa45d514e681c1e7855a58e03872b) - Fixed coroutine tests *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`d64f5fa`](https://github.com/itachi1706/AndroidHelperLib/commit/d64f5fa0ed2c492cfeed4dab231c1b441e45b11b) - Add various unit tests *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`f0faaca`](https://github.com/itachi1706/AndroidHelperLib/commit/f0faacaf00f11ef36da1ba49e52e8553e52a1282) - **deps**: bump stefanzweifel/git-auto-commit-action from 6 to 7 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`1b9c55c`](https://github.com/itachi1706/AndroidHelperLib/commit/1b9c55c663751d6ac49a358aba58bf6b3af5634c) - **deps**: bump actions/checkout from 5 to 6 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`e0fd391`](https://github.com/itachi1706/AndroidHelperLib/commit/e0fd39181b9713b9701dc9a1b61e20ee54d69a76) - **deps**: bump actions/cache from 4 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`632ebc7`](https://github.com/itachi1706/AndroidHelperLib/commit/632ebc70d4c98ddebd2a99fbfeefee29bd291e60) - **deps**: Bump minor dependencies *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`534a57e`](https://github.com/itachi1706/AndroidHelperLib/commit/534a57effaf0512af9b88bc5425376b0fc4c5154) - **deps**: Bump gradle to latest 8.14.x *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`7d03fb6`](https://github.com/itachi1706/AndroidHelperLib/commit/7d03fb6b9b98e43a6f5c82ea2ff63e33b825f580) - Update comments *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`7c89ede`](https://github.com/itachi1706/AndroidHelperLib/commit/7c89edea76bf9ec1b218a6d1dc36a9bc61d38a24) - Add folder listing *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.3.1] - 2025-10-02
 ### :bug: Bug Fixes
 - [`a2d9dc7`](https://github.com/itachi1706/AndroidHelperLib/commit/a2d9dc7c426941ec21eb4531f76b8f1b2641d7c9) - Set call handling to not use base url as path *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -184,3 +205,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.2.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.1.0...2.2.0
 [2.3.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.2.0...2.3.0
 [2.3.1]: https://github.com/itachi1706/AndroidHelperLib/compare/2.3.0...2.3.1
+[2.3.2]: https://github.com/itachi1706/AndroidHelperLib/compare/2.3.1...2.3.2
