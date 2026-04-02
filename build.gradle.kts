@@ -14,6 +14,6 @@ sonarqube {
         property("sonar.androidLint.reportPaths", "helperlib/build/reports/lint-results-debug.xml")
         property("sonar.projectVersion", project(":helperlib").ext.get("version") ?: "1.0")
         property("sonar.tests", "src/test/java,src/test/kotlin")
-        property("sonar.coverage.jacoco.xmlReportPaths", "helperlib/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
     }
 }

@@ -32,8 +32,6 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
       - name: Run tests, linting and coverage generation first
         run: ./gradlew lint jacocoTestReport
-      - name: (DEBUG) Check locations
-        run: ls -laR build/reports && ls -laR helperlib/build/reports
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
