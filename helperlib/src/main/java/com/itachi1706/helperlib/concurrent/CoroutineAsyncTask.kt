@@ -32,19 +32,19 @@ abstract class CoroutineAsyncTask<Params, Progress, Result>(val taskName: String
     var bgJob: Deferred<Result>? = null
     abstract fun doInBackground(vararg params: Params?): Result
     open fun onProgressUpdate(vararg params: Progress?) {
-        // abstract fn
+        // Hook method for subclasses extending from this open function
     }
 
     open fun onPostExecute(result: Result?) {
-        // abstract fn
+        // Hook method for subclasses extending from this open function
     }
 
     open fun onPreExecute() {
-        // abstract fn
+        // Hook method for subclasses extending from this open function
     }
 
     open fun onCancelled(result: Result?) {
-        // abstract fn
+        // Hook method for subclasses extending from this open function
     }
 
     var isCancelled = false
