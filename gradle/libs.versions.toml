@@ -1,10 +1,12 @@
 [versions]
-androidLibrary = "9.1.0"
+# Hold off AGP 9 due to https://community.sonarsource.com/t/working-towards-the-support-of-android-gradle-plugin-9/177015/6
+androidLibrary = "8.13.2"
 appcompat = "1.7.1"
 coreKtx = "1.18.0"
 espressoCore = "3.7.0"
 junit = "1.3.0"
 junitVersion = "4.13.2"
+kotlinAndroid = "2.3.20"
 kotlinSerialization = "2.3.20"
 kotlinxSerializationJson = "1.10.0"
 kotlinxCoroutines = "1.10.2"
@@ -32,6 +34,7 @@ volley = { module = "com.android.volley:volley", version.ref = "volley" }
 [plugins]
 android-library = { id = "com.android.library", version.ref = "androidLibrary" }
 jacoco = { id = "jacoco" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 

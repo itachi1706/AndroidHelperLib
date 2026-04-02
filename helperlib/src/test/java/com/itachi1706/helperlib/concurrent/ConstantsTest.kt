@@ -1,6 +1,6 @@
 package com.itachi1706.helperlib.concurrent
 
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ConstantsTest {
