@@ -7,8 +7,8 @@ plugins {
     alias(libs.plugins.jacoco)
 }
 
-ext.set("version", "2.3.1")
-ext.set("versionCode", 465)
+ext.set("version", "2.3.2")
+ext.set("versionCode", 495)
 
 android {
     namespace = "com.itachi1706.helperlib"
