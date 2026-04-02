@@ -3,9 +3,9 @@ package com.itachi1706.helperlib.concurrent
 import com.itachi1706.helperlib.concurrent.Constants.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
@@ -18,7 +18,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 @RunWith(MockitoJUnitRunner::class)
-@Ignore("TODO. Broken on CI right now")
 class CoroutineAsyncTaskTest {
 
     private lateinit var task: TestCoroutineAsyncTask
@@ -41,21 +40,25 @@ class CoroutineAsyncTaskTest {
     fun executeTaskSuccessfully() = runBlocking {
         task.execute("param1")
         task.preJob?.join()
-        task.bgJob?.join()
+        task.bgJob?.await()
+        delay(100)
         assertEquals(Status.FINISHED, task.status)
         assertEquals("Result", task.result)
     }
 
     @Test
     fun executeTaskTwiceThrowsException() {
-        task.execute("param1")
-        assertFailsWith<IllegalStateException> {
-            task.execute("param2")
+        runBlocking {
+            task.execute("param1")
+            delay(50)
+            assertFailsWith<IllegalStateException> {
+                task.execute("param2")
+            }
         }
     }
 
     @Test
-    fun cancelTaskBeforeExecution() = runBlocking {
+    fun cancelTaskBeforeExecution() {
         task.cancel(true)
         assertEquals(Status.PENDING, task.status)
         assertEquals(false, task.isCancelled)
@@ -66,6 +69,7 @@ class CoroutineAsyncTaskTest {
         task.execute("param1")
         task.preJob?.join()
         task.cancel(true)
+        delay(100)
         assertEquals(Status.FINISHED, task.status)
         assertEquals(true, task.isCancelled)
     }
@@ -74,46 +78,53 @@ class CoroutineAsyncTaskTest {
     fun publishProgressUpdates() = runBlocking {
         task.execute("param1")
         task.publishProgress(50)
+        delay(100)
         assertEquals(50, task.progress)
     }
 
     @Test
-    fun executeOnExecutorSuccessfully() = runTest {
+    fun executeOnExecutorSuccessfully() = runBlocking {
         task.executeOnExecutor("param1")
         task.preJob?.join()
-        task.bgJob?.join()
+        task.bgJob?.await()
+        delay(100)
         assertEquals(Status.FINISHED, task.status)
         assertEquals("Result", task.result)
     }
 
     @Test
-    fun executeOnExecutorTwiceThrowsException() = runTest {
-        task.executeOnExecutor("param1")
-        assertFailsWith<IllegalStateException> {
-            task.executeOnExecutor("param2")
+    fun executeOnExecutorTwiceThrowsException() {
+        runBlocking {
+            task.executeOnExecutor("param1")
+            delay(50)
+            assertFailsWith<IllegalStateException> {
+                task.executeOnExecutor("param2")
+            }
         }
     }
 
     @Test
-    fun cancelTaskBeforeExecutionOnExecutor() = runTest {
+    fun cancelTaskBeforeExecutionOnExecutor() {
         task.cancel(true)
         assertEquals(Status.PENDING, task.status)
         assertEquals(false, task.isCancelled)
     }
 
     @Test
-    fun cancelTaskDuringExecutionOnExecutor() = runTest {
+    fun cancelTaskDuringExecutionOnExecutor() = runBlocking {
         task.executeOnExecutor("param1")
         task.preJob?.join()
         task.cancel(true)
+        delay(100)
         assertEquals(Status.FINISHED, task.status)
         assertEquals(true, task.isCancelled)
     }
 
     @Test
-    fun publishProgressUpdatesOnExecutor() = runTest {
+    fun publishProgressUpdatesOnExecutor() = runBlocking {
         task.executeOnExecutor("param1")
         task.publishProgress(50)
+        delay(100)
         assertEquals(50, task.progress)
     }
 
