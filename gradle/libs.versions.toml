@@ -1,6 +1,6 @@
 [versions]
 # Hold off AGP 9 due to https://community.sonarsource.com/t/working-towards-the-support-of-android-gradle-plugin-9/177015/6
-androidLibrary = "8.13.2"
+androidLibrary = "9.2.0"
 appcompat = "1.7.1"
 coreKtx = "1.18.0"
 espressoCore = "3.7.0"
