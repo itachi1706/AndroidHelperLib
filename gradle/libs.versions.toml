@@ -33,7 +33,6 @@ volley = { module = "com.android.volley:volley", version.ref = "volley" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "androidLibrary" }
-jacoco = { id = "jacoco" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
