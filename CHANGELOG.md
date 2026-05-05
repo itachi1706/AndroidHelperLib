@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.3] - 2026-05-05
+### :sparkles: New Features
+- [`9299b69`](https://github.com/itachi1706/AndroidHelperLib/commit/9299b693746dd864bb4e84745b296a11f35d755d) - Bump AGP to 9.2 *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`277b5d5`](https://github.com/itachi1706/AndroidHelperLib/commit/277b5d5fffbc4f8e47f690dd9d2569bf708545e2) - **deps**: bump softprops/action-gh-release from 2 to 3 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [2.3.2] - 2026-04-02
 ### :sparkles: New Features
 - [`df13790`](https://github.com/itachi1706/AndroidHelperLib/commit/df13790d69fa6a8cdfe14d4d68f564f77c6e7f3e) - **deps**: Bump AGP to 9.1.0 *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -206,3 +214,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.3.0]: https://github.com/itachi1706/AndroidHelperLib/compare/2.2.0...2.3.0
 [2.3.1]: https://github.com/itachi1706/AndroidHelperLib/compare/2.3.0...2.3.1
 [2.3.2]: https://github.com/itachi1706/AndroidHelperLib/compare/2.3.1...2.3.2
+[2.3.3]: https://github.com/itachi1706/AndroidHelperLib/compare/2.3.2...2.3.3
