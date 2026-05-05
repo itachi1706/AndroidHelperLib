@@ -1,9 +1,9 @@
 package com.itachi1706.helperlib.helpers
 
 import com.itachi1706.helperlib.interfaces.LogHandler
+import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
-import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class LogHelperTest {

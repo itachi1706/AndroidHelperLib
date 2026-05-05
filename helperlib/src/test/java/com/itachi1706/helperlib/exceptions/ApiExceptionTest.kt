@@ -1,6 +1,6 @@
 package com.itachi1706.helperlib.exceptions
 
-import kotlin.test.Test
+import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 

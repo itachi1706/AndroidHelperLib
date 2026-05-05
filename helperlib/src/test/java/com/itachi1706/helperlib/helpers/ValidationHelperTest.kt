@@ -1,6 +1,6 @@
 package com.itachi1706.helperlib.helpers
 
-import kotlin.test.Test
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class ValidationHelperTest {
