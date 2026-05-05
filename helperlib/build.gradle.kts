@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -77,5 +76,5 @@ dependencies {
     implementation(libs.volley)
 }
 
-// Apply the publish.gradle file
+// Apply publishing with publish.gradle file
 apply(from = "./publish.gradle")

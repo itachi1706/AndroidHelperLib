@@ -1,7 +1,7 @@
 package com.itachi1706.helperlib.objects
 
 import com.android.volley.Request
-import kotlin.test.Test
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class HttpRequestTest {

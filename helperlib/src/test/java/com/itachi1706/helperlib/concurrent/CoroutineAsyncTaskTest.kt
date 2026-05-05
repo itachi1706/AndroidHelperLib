@@ -7,12 +7,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.spy
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
@@ -23,14 +23,14 @@ class CoroutineAsyncTaskTest {
     private val testDispatcher = Dispatchers.Unconfined
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    @BeforeTest
+    @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         task = spy(TestCoroutineAsyncTask())
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    @AfterTest
+    @After
     fun tearDown() {
         Dispatchers.resetMain()
     }
